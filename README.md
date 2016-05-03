@@ -1,5 +1,10 @@
 # Inventaris
-Simple assets managemen apps 
+Simple assets managemen apps
+Based on Laravel 5.2 with some additional packages
+- laravelcollective/html
+- laracasts/flash
+- doctrine/dbal
+- yajra/laravel-datatables-oracle
 
 # Installation
 1. Run composer update to install all dependencies. Composer homepage : https://getcomposer.org/
