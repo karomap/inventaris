@@ -2,7 +2,10 @@
 
 use App\Bidang;
 use App\Golongan;
+<<<<<<< HEAD
 use App\Item;
+=======
+>>>>>>> 2beb6507ba950b07bbb2cfb3fca9cb70b58a8771
 use App\Kelompok;
 
 setlocale(LC_ALL, 'id-ID');
@@ -93,6 +96,7 @@ function numspell($num)
 
   return ucwords($result);
 }
+<<<<<<< HEAD
 
 function jumlah($var)
 {
@@ -106,3 +110,5 @@ function jumlah($var)
       break;
   }
 }
+=======
+>>>>>>> 2beb6507ba950b07bbb2cfb3fca9cb70b58a8771

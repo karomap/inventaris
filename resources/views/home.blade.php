@@ -3,6 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content')
+<<<<<<< HEAD
 <!-- top tiles -->
 <div class="row tile_count">
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -38,11 +39,14 @@
 </div>
 <!-- /top tiles -->
 
+=======
+>>>>>>> 2beb6507ba950b07bbb2cfb3fca9cb70b58a8771
 <div class="row">
   <div class="col-md-12">
     <div class="x_panel">
       <div class="x_title">
         <h2>Statistik</h2>
+<<<<<<< HEAD
 
         <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -60,6 +64,8 @@
           </li>
         </ul>
 
+=======
+>>>>>>> 2beb6507ba950b07bbb2cfb3fca9cb70b58a8771
         <div class="clearfix"></div>
       </div>
 

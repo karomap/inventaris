@@ -70,6 +70,7 @@ class InventarisController extends Controller
     {
         $this->validate($request, [
             'id_kategori' => 'required',
+<<<<<<< HEAD
             'merk_type' => 'required',
             'no_spcm' => 'required',
             'bahan' => 'required',
@@ -78,6 +79,16 @@ class InventarisController extends Controller
             'keadaan' => 'required',
             'jumlah' => 'required|numeric',
             'harga' => 'required|numeric'
+=======
+            'merk_type' => 'required|max:50|alpha_num',
+            'no_spcm' => 'required|max:50|alpha_num',
+            'bahan' => 'required|max:50|alpha_num',
+            'asal' => 'required',
+            'tahun' => 'required|numeric',
+            'keadaan' => 'required',
+            'jumlah' => 'required|numeric|min:0',
+            'harga' => 'required|integer|min:0|digits_between:1,10'
+>>>>>>> 2beb6507ba950b07bbb2cfb3fca9cb70b58a8771
         ]);
 
         $item = new Item;
@@ -137,6 +148,7 @@ class InventarisController extends Controller
     {
         $this->validate($request, [
             'id_kategori' => 'required',
+<<<<<<< HEAD
             'merk_type' => 'required',
             'no_spcm' => 'required',
             'bahan' => 'required',
@@ -145,6 +157,16 @@ class InventarisController extends Controller
             'keadaan' => 'required',
             'jumlah' => 'required|numeric',
             'harga' => 'required|numeric'
+=======
+            'merk_type' => 'required|max:50|alpha_num',
+            'no_spcm' => 'required|max:50|alpha_num',
+            'bahan' => 'required|max:50|alpha_num',
+            'asal' => 'required',
+            'tahun' => 'required|numeric',
+            'keadaan' => 'required',
+            'jumlah' => 'required|numeric|min:0',
+            'harga' => 'required|integer|min:0|digits_between:1,10'
+>>>>>>> 2beb6507ba950b07bbb2cfb3fca9cb70b58a8771
         ]);
 
         $item = Item::findOrFail($id);
