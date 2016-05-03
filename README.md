@@ -15,10 +15,11 @@ Simple assets managemen apps
 
 # Components
 <ul>
-<li>Admin template : <a href="https://colorlib.com/wp/free-bootstrap-admin-dashboard-templates/">Gentelella</a></li>
-<li><a href="http://getbootstrap.com/">Bootstrap 3</a></li>
-<li><a href="https://jqueryui.com/">jQuery UI</a></li>
-<li><a href="https://github.com/eternicode/bootstrap-datepicker">Bootstrap Datepicker</a></li>
-<li><a href="https://sciactive.com/pnotify/">PNotify</a></li>
-<li><a href="http://limonte.github.io/sweetalert2/">Sweet Alert 2</a></li>
+<li>Admin template : <a target="_blank" href="https://colorlib.com/wp/free-bootstrap-admin-dashboard-templates/">Gentelella</a></li>
+<li><a target="_blank" href="http://getbootstrap.com/">Bootstrap 3</a></li>
+<li><a target="_blank" href="https://nakupanda.github.io/bootstrap3-dialog/">Bootstrap 3 Dialog</a></li>
+<li><a target="_blank" href="https://jqueryui.com/">jQuery UI</a></li>
+<li><a target="_blank" href="https://github.com/eternicode/bootstrap-datepicker">Bootstrap Datepicker</a></li>
+<li><a target="_blank" href="https://sciactive.com/pnotify/">PNotify</a></li>
+<li><a target="_blank" href="http://limonte.github.io/sweetalert2/">Sweet Alert 2</a></li>
 </ul>
