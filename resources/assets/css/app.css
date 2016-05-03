@@ -1,0 +1,26 @@
+#notif {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 50%;
+  z-index: 2000;
+}
+.ui-autocomplete {
+  background: #f5f5f5;
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.ui-autocomplete .dropdown-item {
+  border-bottom: 1px solid #eee;
+}
+.ui-autocomplete .dropdown-item a:hover, .ui-state-focus a {
+  background: #1ABB9C;
+  color: #fff !important;
+}
+.ui-helper-hidden-accessible {
+  display: none;
+}
+input[readonly] {
+  background: #fff !important;
+}
