@@ -75,13 +75,18 @@
                   <td>{{ $item->jumlah }}</td>
                   <td class="text-right">Rp. {{ number_format($item->harga, 2, ',', '.') }}</td>
                   <td class="text-center">
-                    {!! Form::model($item, ['route' => ['inventaris.hapus', $item], 'method' => 'delete', 'class' => 'form-inline']) !!}
-                    <div class="btn-group">
+                    @if(Auth::user()->isAdmin() || Auth::user()->id == $item->register)
+                      {!! Form::model($item, ['route' => ['inventaris.hapus', $item], 'method' => 'delete', 'class' => 'form-inline']) !!}
+                      <div class="btn-group">
+                        <a class="preview btn btn-info btn-xs" data-href="{{ route('inventaris.detail', $item) }}" title="Detail"><i class="fa fa-eye"></i></a>
+                        <a class="btn btn-success btn-xs" href="{{ route('inventaris.edit', $item) }}" title="Edit"><i class="fa fa-pencil"></i></a>
+                        {!! Form::button('<i class="fa fa-trash"></i>', ['class' => 'hapus btn btn-danger btn-xs', 'title' => 'Hapus', 'data-barang' => $item->merk_type]) !!}
+                      </div>
+                      {!! Form::close() !!}
+                    @else
                       <a class="preview btn btn-info btn-xs" data-href="{{ route('inventaris.detail', $item) }}" title="Detail"><i class="fa fa-eye"></i></a>
                       <a class="btn btn-success btn-xs" href="{{ route('inventaris.edit', $item) }}" title="Edit"><i class="fa fa-pencil"></i></a>
-                      {!! Form::button('<i class="fa fa-trash"></i>', ['class' => 'hapus btn btn-danger btn-xs', 'title' => 'Hapus', 'data-barang' => $item->merk_type]) !!}
-                    </div>
-                    {!! Form::close() !!}
+                    @endif
                   </td>
                 </tr>
                 <?php $total += $item->harga ?>
