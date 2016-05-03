@@ -3,7 +3,6 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<<<<<<< HEAD
 <!-- top tiles -->
 <div class="row tile_count">
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -39,14 +38,11 @@
 </div>
 <!-- /top tiles -->
 
-=======
->>>>>>> 2beb6507ba950b07bbb2cfb3fca9cb70b58a8771
 <div class="row">
   <div class="col-md-12">
     <div class="x_panel">
       <div class="x_title">
         <h2>Statistik</h2>
-<<<<<<< HEAD
 
         <ul class="nav navbar-right panel_toolbox">
           <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -64,42 +60,42 @@
           </li>
         </ul>
 
-=======
->>>>>>> 2beb6507ba950b07bbb2cfb3fca9cb70b58a8771
         <div class="clearfix"></div>
       </div>
 
       <div class="x_content">
-        <table class="table table-hover table-bordered">
-          <thead>
-            <tr>
-              <th class="text-center">Kode</th>
-              <th class="text-center">Bidang</th>
-              <th class="text-center">Jumlah Barang</th>
-              <th class="text-center">Jumlah Harga (Rp.)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php $total = 0 ?>
-            @foreach($golongan as $gol)
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered">
+            <thead>
               <tr>
-                <td class="text-center"><span class="badge">{{ $gol->golongan }}</span></td>
-                <td><span class="badge">{{ $gol->uraian }}</span></td>
-                <td class="text-center"><span class="badge">{{ $gol->jumlah() }}</span></td>
-                <td class="text-right"><span class="badge">{{ $gol->harga() > 0 ? number_format($gol->harga(), 2, ',', '.') : '-' }}</span></td>
+                <th class="text-center">Kode</th>
+                <th class="text-center">Bidang</th>
+                <th class="text-center">Jumlah Barang</th>
+                <th class="text-center">Jumlah Harga (Rp.)</th>
               </tr>
-              <?php $total += $gol->harga() ?>
-              @foreach($gol->bidang as $bidang)
+            </thead>
+            <tbody>
+              <?php $total = 0 ?>
+              @foreach($golongan as $gol)
                 <tr>
-                  <td class="text-center">{{ $bidang->bidang }}</td>
-                  <td>{{ $bidang->uraian }}</td>
-                  <td class="text-center">{{ $bidang->jumlah() }}</td>
-                  <td class="text-right">{{ $bidang->harga() > 0 ? number_format($bidang->harga(), 2, ',', '.') : '-' }}</td>
+                  <td class="text-center"><span class="badge">{{ $gol->golongan }}</span></td>
+                  <td><span class="badge">{{ $gol->uraian }}</span></td>
+                  <td class="text-center"><span class="badge">{{ $gol->jumlah() }}</span></td>
+                  <td class="text-right"><span class="badge">{{ $gol->harga() > 0 ? number_format($gol->harga(), 2, ',', '.') : '-' }}</span></td>
                 </tr>
+                <?php $total += $gol->harga() ?>
+                @foreach($gol->bidang as $bidang)
+                  <tr>
+                    <td class="text-center">{{ $bidang->bidang }}</td>
+                    <td>{{ $bidang->uraian }}</td>
+                    <td class="text-center">{{ $bidang->jumlah() }}</td>
+                    <td class="text-right">{{ $bidang->harga() > 0 ? number_format($bidang->harga(), 2, ',', '.') : '-' }}</td>
+                  </tr>
+                @endforeach
               @endforeach
-            @endforeach
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
 
         <hr>
         <div class="pull-left">
