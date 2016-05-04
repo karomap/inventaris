@@ -9,23 +9,17 @@
 @section('content')
 <div class="row">
   <div class="col-xs-12">
-    <div class="x_panel">
-      <div class="x_title">
-        <h2>Filter</h2>
+    {!! Form::model($filter, ['route' => 'inventaris.filter', 'id' => 'formFilter', 'class' => 'form-inline']) !!}
+        {!! Form::select('golongan', ['' => 'SEMUA GOLONGAN']+listKategori('golongan'), null, ['class' => 'form-control input-sm']) !!}
+        {!! Form::select('bidang', !empty($filter['golongan']) ? listKategori('bidang', $filter['golongan']) : ['' => ''], null, ['class' => 'form-control input-sm']) !!}
+        {!! Form::select('kelompok', !empty($filter['bidang']) ? listKategori('kelompok', $filter['bidang']) : ['' => ''], null, ['class' => 'form-control input-sm']) !!}
+        {!! Form::button('<i class="fa fa-filter"></i> Filter', ['class' => 'btn btn-dark btn-sm pull-right', 'type' => 'submit']) !!}
+    {!! Form::close() !!}
+  </div>
+</div>
 
-        <div class="clearfix"></div>
-      </div>
-
-      <div class="x_content">
-        {!! Form::model($filter, ['route' => 'inventaris.filter', 'id' => 'formFilter', 'class' => 'form-inline']) !!}
-            {!! Form::select('golongan', ['' => 'SEMUA GOLONGAN']+listKategori('golongan'), null, ['class' => 'form-control input-sm']) !!}
-            {!! Form::select('bidang', !empty($filter['golongan']) ? listKategori('bidang', $filter['golongan']) : ['' => ''], null, ['class' => 'form-control input-sm']) !!}
-            {!! Form::select('kelompok', !empty($filter['bidang']) ? listKategori('kelompok', $filter['bidang']) : ['' => ''], null, ['class' => 'form-control input-sm']) !!}
-            {!! Form::button('<i class="fa fa-filter"></i> Filter', ['class' => 'btn btn-dark pull-right', 'type' => 'submit']) !!}
-        {!! Form::close() !!}
-      </div>
-    </div>
-
+<div class="row">
+  <div class="col-xs-12">
     <div class="x_panel">
       <div class="x_title">
         <h2>Daftar Asset</h2>
@@ -77,11 +71,9 @@
                   <td class="text-center">
                     @if(Auth::user()->isAdmin() || Auth::user()->id == $item->register)
                       {!! Form::model($item, ['route' => ['inventaris.hapus', $item], 'method' => 'delete', 'class' => 'form-inline']) !!}
-                      <div class="btn-group">
                         <a class="preview btn btn-info btn-xs" data-href="{{ route('inventaris.detail', $item) }}" title="Detail"><i class="fa fa-eye"></i></a>
                         <a class="btn btn-success btn-xs" href="{{ route('inventaris.edit', $item) }}" title="Edit"><i class="fa fa-pencil"></i></a>
                         {!! Form::button('<i class="fa fa-trash"></i>', ['class' => 'hapus btn btn-danger btn-xs', 'title' => 'Hapus', 'data-barang' => $item->merk_type]) !!}
-                      </div>
                       {!! Form::close() !!}
                     @else
                       <a class="preview btn btn-info btn-xs" data-href="{{ route('inventaris.detail', $item) }}" title="Detail"><i class="fa fa-eye"></i></a>

@@ -31,7 +31,6 @@
             <ul class="nav child_menu">
               <li><a href="{{ route('inventaris.index') }}">Daftar Asset</a></li>
               <li><a href="{{ route('inventaris.baru') }}">Asset Baru</a></li>
-              <li><a href="#">Kategori Asset</a></li>
             </ul>
           </li>
         </ul>

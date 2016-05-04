@@ -88,10 +88,10 @@
   {!! Form::label('asal', 'Asal / Cara Perolehan') !!}
   <div class="clearfix"></div>
   <div class="btn-group" data-toggle="buttons">
-    <label class="btn btn-primary {{ isset($model) && $model->asal == 'pembelian' ? 'active' : '' }}">
+    <label class="btn btn-primary btn-sm {{ isset($model) && $model->asal == 'pembelian' ? 'active' : '' }}">
       {!! Form::radio('asal', 'pembelian') !!} Pembelian
     </label>
-    <label class="btn btn-primary {{ isset($model) && $model->asal == 'hibah' ? 'active' : '' }}">
+    <label class="btn btn-primary btn-sm {{ isset($model) && $model->asal == 'hibah' ? 'active' : '' }}">
       {!! Form::radio('asal', 'hibah') !!} Hibah
     </label>
   </div>
@@ -120,13 +120,13 @@
   {!! Form::label('keadaan', 'Keadaan') !!}
   <div class="clearfix"></div>
   <div class="btn-group" data-toggle="buttons">
-    <label class="btn btn-primary {{ isset($model) && $model->keadaan == 'b' ? 'active' : '' }}">
+    <label class="btn btn-primary btn-sm {{ isset($model) && $model->keadaan == 'b' ? 'active' : '' }}">
       {!! Form::radio('keadaan', 'b') !!} Baik
     </label>
-    <label class="btn btn-primary {{ isset($model) && $model->keadaan == 'kb' ? 'active' : '' }}">
+    <label class="btn btn-primary btn-sm {{ isset($model) && $model->keadaan == 'kb' ? 'active' : '' }}">
       {!! Form::radio('keadaan', 'kb') !!} Kurang Baik
     </label>
-    <label class="btn btn-primary {{ isset($model) && $model->keadaan == 'rb' ? 'active' : '' }}">
+    <label class="btn btn-primary btn-sm {{ isset($model) && $model->keadaan == 'rb' ? 'active' : '' }}">
       {!! Form::radio('keadaan', 'rb') !!} Rusak Berat
     </label>
   </div>

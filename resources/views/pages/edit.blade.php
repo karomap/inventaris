@@ -18,8 +18,8 @@
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-xs-12">
-              <a href="{{ route('inventaris.index') }}" class="btn btn-default"><i class="fa fa-times"></i> Batal</a>
-              {!! Form::button('<i class="fa fa-refresh"></i> Perbarui', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+              <a href="{{ route('inventaris.index') }}" class="btn btn-default btn-sm"><i class="fa fa-times"></i> Batal</a>
+              {!! Form::button('<i class="fa fa-refresh"></i> Perbarui', ['type' => 'submit', 'class' => 'btn btn-success btn-sm']) !!}
             </div>
           </div>
 
