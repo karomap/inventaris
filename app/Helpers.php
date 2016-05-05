@@ -100,6 +100,10 @@ function jumlah($var)
     case 'item':
       return Item::count();
       break;
+
+    case 'item_baik':
+      return Item::where('keadaan', 'b')->count();
+      break;
     
     default:
       # code...

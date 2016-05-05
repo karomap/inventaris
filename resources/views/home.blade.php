@@ -8,7 +8,7 @@
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
     <span class="count_top"><i class="fa fa-cubes"></i> Total Barang</span>
     <div class="count">{{ jumlah('item') }}</div>
-    <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>4% </i> From last Week</span>
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
     <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
@@ -17,7 +17,7 @@
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
     <span class="count_top"><i class="fa fa-user"></i> Total Males</span>
-    <div class="count green">2,500</div>
+    <div class="count green">{{ jumlah('item_baik') }}</div>
     <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
