@@ -74,3 +74,59 @@ $('[name=findkategori]').autocomplete({
           sub_kelompok + ' > ' + uraian + '</a>')
   .appendTo(ul);
 };
+
+$('.yearpicker').datepicker({
+  format: "yyyy",
+  startView: 2,
+  minViewMode: 2,
+  clearBtn: true,
+  language: "id",
+  autoclose: true
+});
+
+$('.batal').click(function(e){
+  e.preventDefault();
+
+  if($(this).prop('href') != "") {
+    NProgress.start();
+    $('.right_col').load($(this).prop('href'), function(){
+      NProgress.done();
+      $('title').html($('.judul').html());
+    });
+  }
+});
+
+var form = $('#formAset');
+
+$('.simpan').click(function(){
+  $.ajax({
+    url: form.prop('action'),
+    type: 'POST',
+    dataType: 'json',
+    data: form.serialize(),
+    success: function(data) {
+      NProgress.start();
+      $('.right_col').load('/asset', function(){
+        NProgress.done();
+        $('title').html($('.judul').html());
+        swal({
+          title: 'Sukses!',
+          text: data.message,
+          type: data.status,
+          timer: 5000,
+          showCloseButton: true,
+          showConfirmButton: false,
+        });
+      });
+    },
+    error: function(data) {
+      form.find('.has-error').removeClass('has-error');
+      form.find('span.help-block').html('');
+
+      for (var $kolom in data.responseJSON) {
+        $('[name='+$kolom+']').parents('.form-group').addClass('has-error');
+        $('[name='+$kolom+']').parents('.form-group').find('span.help-block').html(data.responseJSON[$kolom][0]);
+      }
+    }
+  });
+});

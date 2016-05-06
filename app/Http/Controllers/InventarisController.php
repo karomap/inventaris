@@ -104,8 +104,7 @@ class InventarisController extends Controller
         $item->keterangan = $request->keterangan;
         $item->save();
 
-        \Flash::success($item->merk_type.' berhasil ditambahkan');
-        return redirect()->route('inventaris.index');
+        return response(['status' => 'success', 'message' => $item->merk_type.' berhasil ditambahkan.']);
     }
 
     /**
@@ -179,8 +178,7 @@ class InventarisController extends Controller
         $item->keterangan = $request->keterangan;
         $item->update();
 
-        \Flash::success($item->merk_type.' berhasil diperbarui');
-        return redirect()->route('inventaris.index');
+        return response(['status' => 'success', 'message' => $item->merk_type.' berhasil diperbarui.']);
     }
 
     /**
@@ -194,8 +192,7 @@ class InventarisController extends Controller
         $item = Item::findOrFail($id);
         $item->delete();
 
-        \Flash::success($item->merk_type.' berhasil dihapus');
-        return redirect()->route('inventaris.index');
+        return response(['status' => 'success', 'message' => $item->merk_type.' berhasil dihapus.']);
     }
 
     public function autocomplete(Request $request)

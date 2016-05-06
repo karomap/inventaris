@@ -16,15 +16,15 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        {!! Form::model($item, ['route' => ['inventaris.update', $item], 'method' => 'patch', 'class' => 'form-vertical']) !!}
+        {!! Form::model($item, ['route' => ['inventaris.update', $item], 'method' => 'patch', 'id' => 'formAset', 'class' => 'form-vertical']) !!}
 
         @include('pages._form', ['model' => $item])
 
           <div class="ln_solid"></div>
           <div class="form-group">
             <div class="col-xs-12">
-              <a href="{{ route('inventaris.index') }}" class="btn btn-default btn-sm"><i class="fa fa-times"></i> Batal</a>
-              {!! Form::button('<i class="fa fa-refresh"></i> Perbarui', ['type' => 'submit', 'class' => 'btn btn-success btn-sm']) !!}
+              <a href="{{ route('inventaris.index') }}" class="batal btn btn-default btn-sm"><i class="fa fa-times"></i> Batal</a>
+              {!! Form::button('<i class="fa fa-refresh"></i> Perbarui', ['class' => 'simpan btn btn-success btn-sm']) !!}
             </div>
           </div>
 
@@ -33,7 +33,3 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-  
-</script>

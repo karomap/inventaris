@@ -61,12 +61,3 @@ $('.keluar').click(function(){
     }
   })
 });
-
-$('.yearpicker').datepicker({
-  format: "yyyy",
-  startView: 2,
-  minViewMode: 2,
-  clearBtn: true,
-  language: "id",
-  autoclose: true
-});

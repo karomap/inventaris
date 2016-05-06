@@ -99,16 +99,14 @@
         @else
           Tidak ada data.
           
-          @push('scripts')
-            <script type="text/javascript">
-              new PNotify({
-                  title: 'Error!',
-                  text: 'Tidak ada data.',
-                  type: 'error',
-                  styling: 'bootstrap3'
-              });
-            </script>
-          @endpush
+          <script type="text/javascript">
+            new PNotify({
+                title: 'Error!',
+                text: 'Tidak ada data.',
+                type: 'error',
+                styling: 'bootstrap3'
+            });
+          </script>
         @endif
       </div>
     </div>
@@ -162,20 +160,46 @@
   $('.hapus').each(function(){
     $(this).click(function(){
       var form = $(this).parents('form'),
-          barang = $(this).data('barang');
+          barang = $(this).data('barang'),
+          result = {};
 
       swal({
         title: 'Apakah Anda yakin?',
         text: "Anda akan menghapus data "+barang+"<br>Data yang dihapus tidak dapat dikembalikan",
         type: 'warning',
         showCancelButton: true,
+        allowOutsideClick: false,
         confirmButtonColor: '#D9534F',
         cancelButtonColor: '#394D5F',
         confirmButtonText: 'Ya, hapus data ini!',
-        cancelButtonText: 'Batal'
+        cancelButtonText: 'Batal',
+        preConfirm: function() {
+          return new Promise(function(resolve){
+            swal.enableLoading();
+            $.ajax({
+              url: form.prop('action'),
+              type: 'POST',
+              dataType: 'json',
+              data: form.serialize(),
+              success: function(data) {
+                result = data;
+                resolve();
+              }
+            });            
+          });
+        }
       }).then(function(isConfirm) {
         if (isConfirm) {
-          form.submit();
+          $('.right_col').load('/asset', function(){
+            swal({
+              title: 'Sukses!',
+              text: result.message,
+              type: result.status,
+              timer: 5000,
+              showCloseButton: true,
+              showConfirmButton: false,
+            });
+          });
         }
       })
     });
