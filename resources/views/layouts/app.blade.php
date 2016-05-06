@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>@yield('title') | Inventaris</title>
+    <title>Inventaris</title>
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
@@ -25,21 +25,7 @@
       @include('layouts._topnav')
 
         <!-- page content -->
-        <div class="right_col" role="main">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>@yield('title')</h3>
-              </div>
-              <div class="pull-right">
-                @yield('header-kanan')
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <hr style="margin-top: 0">
-
-            @yield('content')
-
-        </div>
+        <div class="right_col" role="main"></div>
         <!-- /page content -->
 
         <!-- footer content -->

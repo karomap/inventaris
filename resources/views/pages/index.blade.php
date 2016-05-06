@@ -1,12 +1,14 @@
-@extends('layouts.app')
+<div class="page-title">
+  <div class="title_left">
+    <h3 class="judul" data-current="daftar-aset">Daftar Aset</h3>
+  </div>
+  <div class="pull-right">
+    <a class="btn btn-dark btn-sm" href="{{ route('inventaris.baru') }}"><i class="fa fa-plus"></i> Tambah Baru</a>
+  </div>
+</div>
+<div class="clearfix"></div>
+<hr style="margin-top: 0">
 
-@section('title', 'Daftar Asset')
-
-@section('header-kanan')
-  <a class="btn btn-dark btn-sm" href="{{ route('inventaris.baru') }}"><i class="fa fa-plus"></i> Tambah Baru</a>
-@endsection
-
-@section('content')
 <div class="row">
   <div class="col-xs-12">
     {!! Form::model($filter, ['route' => 'inventaris.filter', 'id' => 'formFilter', 'class' => 'form-inline']) !!}
@@ -112,18 +114,18 @@
     </div>
   </div>
 </div>
-@endsection
 
-@push('scripts')
 <script type="text/javascript">
-    changeKategori($('[name=golongan]').val(), $('[name=bidang]'), 'bidang');
+  ajaxlink();
+
+  changeKategori($('[name=golongan]').val(), $('[name=bidang]'), 'bidang');
 
 @if(!empty($filter['golongan']))
-    changeKategori({{ $filter['golongan'] }}, $('[name=bidang]'), 'bidang');
+  changeKategori({{ $filter['golongan'] }}, $('[name=bidang]'), 'bidang');
 @endif
 
 @if(!empty($filter['bidang']))
-    changeKategori({{ $filter['bidang'] }}, $('[name=kelompok]'), 'kelompok');
+  changeKategori({{ $filter['bidang'] }}, $('[name=kelompok]'), 'kelompok');
 @endif
 
   $('[name=golongan]').change(function(){
@@ -179,4 +181,3 @@
     });
   });
 </script>
-@endpush

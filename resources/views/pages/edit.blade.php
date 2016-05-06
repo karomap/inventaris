@@ -1,8 +1,13 @@
-@extends('layouts.app')
+<div class="page-title">
+  <div class="title_left">
+    <h3 class="judul">Edit Aset</h3>
+  </div>
+  <div class="pull-right">
+  </div>
+</div>
+<div class="clearfix"></div>
+<hr style="margin-top: 0">
 
-@section('title', 'Edit Asset')
-
-@section('content')
 <div class="row">
   <div class="col-xs-12 col-md-8 col-md-offset-2">
     <div class="x_panel">
@@ -28,4 +33,7 @@
     </div>
   </div>
 </div>
-@endsection
+
+<script type="text/javascript">
+  
+</script>

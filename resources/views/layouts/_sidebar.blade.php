@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col">
   <div class="left_col scroll-view">
     <div class="navbar nav_title" style="border: 0;">
-      <a href="{{ url('/') }}" class="site_title"><i class="fa fa-cube"></i> <span>Inventaris</span></a>
+      <a href="{{ url('/dashboard') }}" class="site_title"><i class="fa fa-cube"></i> <span>Inventaris</span></a>
     </div>
 
     <div class="clearfix"></div>
@@ -26,11 +26,11 @@
       <div class="menu_section">
         <h3>Menu</h3>
         <ul class="nav side-menu">
-          <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Dashboard </span></a></li>
-          <li><a><i class="fa fa-list"></i> Manajemen Asset <span class="fa fa-chevron-down"></span></a>
+          <li class="dashboard"><a href="{{ url('/dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard </span></a></li>
+          <li class="parent-menu"><a><i class="fa fa-list"></i> Manajemen Asset <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
-              <li><a href="{{ route('inventaris.index') }}">Daftar Asset</a></li>
-              <li><a href="{{ route('inventaris.baru') }}">Asset Baru</a></li>
+              <li class="daftar-aset"><a href="{{ route('inventaris.index') }}">Daftar Asset</a></li>
+              <li class="aset-baru"><a href="{{ route('inventaris.baru') }}">Asset Baru</a></li>
             </ul>
           </li>
         </ul>

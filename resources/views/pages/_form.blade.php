@@ -1,8 +1,8 @@
-<div class="form-group {{ $errors->has('id_kategori') ? 'has-error' : '' }}">
+<div class="form-group">
   {!! Form::label('id_kategori', 'Nama / Jenis Barang') !!}
   {!! Form::textarea('kategoris', isset($model) ? $model->kategori->parent('list') : null, ['class' => 'form-control input-sm', 'id' => 'kategoris', 'disabled', 'placeholder' => 'Nama / Jenis Barang belum dipilih', 'rows' => '3']) !!}
   {!! Form::hidden('id_kategori', null) !!}
-  {!! $errors->first('id_kategori', '<p class="help-blok">:message</p>') !!}
+  <span class="help-block"></span>
 
   <br>
 
@@ -66,25 +66,25 @@
   </div>
 </div>
 
-<div class="form-group {{ $errors->has('merk_type') ? 'has-error' : '' }}">
+<div class="form-group">
   {!! Form::label('merk_type', 'Merk / Type') !!}
   {!! Form::text('merk_type', null, ['class' => 'form-control input-sm']) !!}
-  {!! $errors->first('merk_type', '<p class="help-blok">:message</p>') !!}
+  <span class="help-block"></span>
 </div>
 
-<div class="form-group {{ $errors->has('no_spcm') ? 'has-error' : '' }}">
+<div class="form-group">
   {!! Form::label('no_spcm', 'No. Sertifikat / No. Pabrik / No. Chasis / No. Mesin') !!}
   {!! Form::text('no_spcm', null, ['class' => 'form-control input-sm']) !!}
-  {!! $errors->first('no_spcm', '<p class="help-blok">:message</p>') !!}
+  <span class="help-block"></span>
 </div>
 
-<div class="form-group {{ $errors->has('bahan') ? 'has-error' : '' }}">
+<div class="form-group">
   {!! Form::label('bahan', 'Bahan') !!}
   {!! Form::text('bahan', null, ['class' => 'form-control input-sm']) !!}
-  {!! $errors->first('bahan', '<p class="help-blok">:message</p>') !!}
+  <span class="help-block"></span>
 </div>
 
-<div class="form-group {{ $errors->has('asal') ? 'has-error' : '' }}">
+<div class="form-group">
   {!! Form::label('asal', 'Asal / Cara Perolehan') !!}
   <div class="clearfix"></div>
   <div class="btn-group" data-toggle="buttons">
@@ -95,28 +95,28 @@
       {!! Form::radio('asal', 'hibah') !!} Hibah
     </label>
   </div>
-  {!! $errors->first('asal', '<p class="help-blok">:message</p>') !!}
+  <span class="help-block"></span>
 </div>
 
-<div class="form-group {{ $errors->has('tahun') ? 'has-error' : '' }}">
+<div class="form-group">
   {!! Form::label('tahun', 'Tahun Pembelian') !!}
   {!! Form::text('tahun', null, ['class' => 'form-control input-sm yearpicker', 'readonly']) !!}
-  {!! $errors->first('tahun', '<p class="help-blok">:message</p>') !!}
+  <span class="help-block"></span>
 </div>
 
-<div class="form-group {{ $errors->has('ukuran_konstruksi') ? 'has-error' : '' }}">
+<div class="form-group">
   {!! Form::label('ukuran_konstruksi', 'Ukuran / Konstruksi') !!}
   {!! Form::text('ukuran_konstruksi', null, ['class' => 'form-control input-sm']) !!}
-  {!! $errors->first('ukuran_konstruksi', '<p class="help-blok">:message</p>') !!}
+  <span class="help-block"></span>
 </div>
 
-<div class="form-group {{ $errors->has('satuan') ? 'has-error' : '' }}">
+<div class="form-group">
   {!! Form::label('satuan', 'Satuan') !!}
   {!! Form::text('satuan', null, ['class' => 'form-control input-sm']) !!}
-  {!! $errors->first('satuan', '<p class="help-blok">:message</p>') !!}
+  <span class="help-block"></span>
 </div>
 
-<div class="form-group {{ $errors->has('keadaan') ? 'has-error' : '' }}">
+<div class="form-group">
   {!! Form::label('keadaan', 'Keadaan') !!}
   <div class="clearfix"></div>
   <div class="btn-group" data-toggle="buttons">
@@ -130,33 +130,28 @@
       {!! Form::radio('keadaan', 'rb') !!} Rusak Berat
     </label>
   </div>
-  {!! $errors->first('keadaan', '<p class="help-blok">:message</p>') !!}
+  <span class="help-block"></span>
 </div>
 
-<div class="form-group {{ $errors->has('jumlah') ? 'has-error' : '' }}">
+<div class="form-group">
   {!! Form::label('jumlah', 'Jumlah Barang') !!}
   {!! Form::number('jumlah', null, ['class' => 'form-control input-sm']) !!}
-  {!! $errors->first('jumlah', '<p class="help-blok">:message</p>') !!}
+  <span class="help-block"></span>
 </div>
 
-<div class="form-group {{ $errors->has('harga') ? 'has-error' : '' }}">
+<div class="form-group">
   {!! Form::label('harga', 'Jumlah Harga') !!}
   <div class="input-group">
     <span class="input-group-addon">Rp.</span>
     {!! Form::number('harga', null, ['class' => 'form-control input-sm']) !!}
   </div>
-  {!! $errors->first('harga', '<p class="help-blok">:message</p>') !!}
+  <span class="help-block"></span>
 </div>
 
-<div class="form-group {{ $errors->has('keterangan') ? 'has-error' : '' }}">
+<div class="form-group">
   {!! Form::label('keterangan', 'Keterangan') !!}
   {!! Form::textarea('keterangan', null, ['class' => 'form-control input-sm', 'rows' => '3']) !!}
-  {!! $errors->first('keterangan', '<p class="help-blok">:message</p>') !!}
+  <span class="help-block"></span>
 </div>
 
-@push('scripts')
-<script type="text/javascript">
-  //$('.manual').hide();
-</script>
 <script type="text/javascript" src="{{ asset('js/input.js') }}"></script>
-@endpush

@@ -1,8 +1,13 @@
-@extends('layouts.app')
+<div class="page-title">
+  <div class="title_left">
+    <h3 class="judul" data-current="dashboard">Dashboard</h3>
+  </div>
+  <div class="pull-right">
+  </div>
+</div>
+<div class="clearfix"></div>
+<hr style="margin-top: 0">
 
-@section('title', 'Dashboard')
-
-@section('content')
 <!-- top tiles -->
 <div class="row tile_count">
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -108,4 +113,7 @@
     </div>
   </div>
 </div>
-@endsection
+
+<script type="text/javascript">
+  ajaxlink();
+</script>

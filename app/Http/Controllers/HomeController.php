@@ -14,7 +14,13 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
+    {
+      return view('layouts.app');
+    }
+
+    public function dashboard()
     {
       $golongan = Golongan::get();
 

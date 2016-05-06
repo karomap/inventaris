@@ -15,6 +15,7 @@ Route::auth();
 
 Route::group(['middleware' => 'auth'], function() {
   Route::get('/', 'HomeController@index');
+  Route::get('dashboard', 'HomeController@dashboard');
 
   Route::get('asset', ['as' => 'inventaris.index', 'uses' => 'InventarisController@index']);
   Route::post('asset', ['as' => 'inventaris.filter', 'uses' => 'InventarisController@index']);
