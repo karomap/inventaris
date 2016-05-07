@@ -40,8 +40,13 @@ class InventarisController extends Controller
             $cond .= " AND id_kategori LIKE '{$request->subkelompok}%'";
         }
 
-        if(!empty($request->kategori)) {
-            $cond .= " AND id_kategori = {$request->kategori}";
+        if(!empty($request->kat)) {
+            $cond .= " AND id_kategori = {$request->kat}";
+        }
+
+        if(!empty($request->keyword)) {
+            $keyword = strtolower($request->keyword);
+            $cond .= " AND LOWER(merk_type) LIKE '%{$keyword}%'";
         }
 
         $items = Item::orderBy($order, $order_state)->whereRaw($cond)->paginate(25);

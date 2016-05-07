@@ -18,12 +18,13 @@ elixir(function(mix) {
     .styles([
       'custom.css','app.css', '../plugins/bootstrap-dialog.css', '../plugins/pnotify.css',
       '../plugins/pnotify.buttons.css', '../plugins/sweetalert2.css', '../plugins/bootstrap-datepicker3.css'], 'public/css/custom.css')
-    .scripts(['jquery.js', 'bootstrap.js', 'jquery-ui.js'], 'public/js/core.js')
+    .scripts(['jquery.js', 'jquery-ui.js', 'bootstrap.js'], 'public/js/core.js')
     .scripts(['../plugins/fastclick.js', '../plugins/nprogress.js', '../plugins/bootstrap-dialog.js',
       '../plugins/pnotify.js', '../plugins/pnotify.buttons.js', '../plugins/sweetalert2.min.js',
       '../plugins/promise.js', '../plugins/bootstrap-datepicker.js', '../plugins/bootstrap-datepicker.id.min.js'], 'public/js/plugins.js')
     .scripts(['custom.js', 'app.js'], 'public/js/custom.js')
     .scripts('input.js', 'public/js/input.js')
+    .scripts('index.js', 'public/js/index.js')
     .copy('resources/assets/fonts', 'public/fonts')
     .copy('resources/assets/images', 'public/images');
 });

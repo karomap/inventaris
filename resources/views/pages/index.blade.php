@@ -1,24 +1,63 @@
+<script type="text/javascript">
+  if (document.getElementsByClassName("right_col").length < 1) {
+    document.location.replace('/');
+  }
+</script>
+
 <div class="page-title">
   <div class="title_left">
     <h3 class="judul" data-current="daftar-aset">Daftar Aset</h3>
   </div>
   <div class="pull-right">
-    <a class="btn btn-dark btn-sm" href="{{ route('inventaris.baru') }}"><i class="fa fa-plus"></i> Tambah Baru</a>
+    <button class="btn btn-dark btn-sm" onclick="$('#formFilter').slideToggle()" title="Tampilkan/Sembunyikan Filter"><i class="fa fa-sort"></i> Filter</button>
+    <a class="tambah-aset btn btn-dark btn-sm" href="{{ route('inventaris.baru') }}"><i class="fa fa-plus"></i> Tambah Baru</a>
   </div>
 </div>
 <div class="clearfix"></div>
 <hr style="margin-top: 0">
 
-<div class="row">
-  <div class="col-xs-12">
-    {!! Form::model($filter, ['route' => 'inventaris.filter', 'id' => 'formFilter', 'class' => 'form-inline']) !!}
-        {!! Form::select('golongan', ['' => 'SEMUA GOLONGAN']+listKategori('golongan'), null, ['class' => 'form-control input-sm']) !!}
-        {!! Form::select('bidang', !empty($filter['golongan']) ? listKategori('bidang', $filter['golongan']) : ['' => ''], null, ['class' => 'form-control input-sm']) !!}
-        {!! Form::select('kelompok', !empty($filter['bidang']) ? listKategori('kelompok', $filter['bidang']) : ['' => ''], null, ['class' => 'form-control input-sm']) !!}
-        {!! Form::button('<i class="fa fa-filter"></i> Filter', ['class' => 'btn btn-dark btn-sm pull-right', 'type' => 'submit']) !!}
-    {!! Form::close() !!}
+{!! Form::model($filter, ['route' => 'inventaris.filter', 'id' => 'formFilter']) !!}
+  <div class="form-group">
+    <div class="col-xs-4">
+      <div class="input-group">
+        {!! Form::text('findkategori', null, ['class' => 'form-control input-sm', 'placeholder' => 'Pencarian Kategori']) !!}
+        <i class="fa fa-search input-group-addon"></i>
+      </div>
+    </div>
+    <div class="col-xs-4"> 
+      {!! Form::select('golongan', ['' => 'SEMUA GOLONGAN']+listKategori('golongan'), null, ['class' => 'form-control input-sm']) !!}
+      <em class="help-block">Golongan</em>
+    </div>
+    <div class="col-xs-4"> 
+      {!! Form::select('bidang', !empty($filter['golongan']) ? listKategori('bidang', $filter['golongan']) : ['' => '-- Pilih Salah Satu --'], null, ['class' => 'form-control input-sm', empty($filter['golongan']) ? 'disabled' : '']) !!}
+      <em class="help-block">Bidang</em>
+    </div>
   </div>
-</div>
+
+  <div class="form-group">
+    <div class="col-xs-4"> 
+      {!! Form::select('kelompok', !empty($filter['bidang']) ? listKategori('kelompok', $filter['bidang']) : ['' => '-- Pilih Salah Satu --'], null, ['class' => 'form-control input-sm', empty($filter['bidang']) ? 'disabled' : '']) !!}
+      <em class="help-block">Kelompok</em>
+    </div>
+    <div class="col-xs-4"> 
+      {!! Form::select('subkelompok', !empty($filter['kelompok']) ? listKategori('subkelompok', $filter['kelompok']) : ['' => '-- Pilih Salah Satu --'], null, ['class' => 'form-control input-sm', empty($filter['kelompok']) ? 'disabled' : '']) !!}
+      <em class="help-block">Sub Kelompok</em>
+    </div>
+    <div class="col-xs-4"> 
+      {!! Form::select('kat', !empty($filter['subkelompok']) ? listKategori('kat', $filter['subkelompok']) : ['' => '-- Pilih Salah Satu --'], null, ['class' => 'form-control input-sm', empty($filter['subkelompok']) ? 'disabled' : '']) !!}
+      <em class="help-block">Nama/Jenis Barang</em>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <div class="col-xs-4">
+      <div class="input-group">
+        {!! Form::text('keyword', null, ['class' => 'form-control input-sm', 'placeholder' => 'Pencarian Merk/Type']) !!}
+        <a onclick="$('#formFilter').submit()" class="cari btn btn-default btn-sm input-group-addon"><i class="fa fa-search"></i></a>
+      </div>
+    </div>
+  </div>
+{!! Form::close() !!}
 
 <div class="row">
   <div class="col-xs-12">
@@ -37,7 +76,7 @@
       <div class="x_content">
         @if($items->count() > 0)
         <div class="table-responsive">
-          <table class="table table-hover">
+          <table class="table table-hover table-condensed">
             <thead>
               <tr>
                 <th>No</th>
@@ -74,7 +113,7 @@
                     @if(Auth::user()->isAdmin() || Auth::user()->id == $item->register)
                       {!! Form::model($item, ['route' => ['inventaris.hapus', $item], 'method' => 'delete', 'class' => 'form-inline']) !!}
                         <a class="preview btn btn-info btn-xs" data-href="{{ route('inventaris.detail', $item) }}" title="Detail"><i class="fa fa-eye"></i></a>
-                        <a class="btn btn-success btn-xs" href="{{ route('inventaris.edit', $item) }}" title="Edit"><i class="fa fa-pencil"></i></a>
+                        <a class="edit btn btn-success btn-xs" href="{{ route('inventaris.edit', $item) }}" title="Edit"><i class="fa fa-pencil"></i></a>
                         {!! Form::button('<i class="fa fa-trash"></i>', ['class' => 'hapus btn btn-danger btn-xs', 'title' => 'Hapus', 'data-barang' => $item->merk_type]) !!}
                       {!! Form::close() !!}
                     @else
@@ -100,11 +139,21 @@
           Tidak ada data.
           
           <script type="text/javascript">
+            /**
+            swal({
+              title: 'Tidak ada data!',
+              text: '',
+              type: 'info',
+              timer: 10000,
+              showCloseButton: true,
+              showConfirmButton: false,
+            });
+            **/
             new PNotify({
-                title: 'Error!',
-                text: 'Tidak ada data.',
-                type: 'error',
-                styling: 'bootstrap3'
+              title: 'Info!',
+              type: 'info',
+              text: 'Tidak ada data.',
+              styling: 'bootstrap3'
             });
           </script>
         @endif
@@ -113,95 +162,9 @@
   </div>
 </div>
 
+<script type="text/javascript" src="{{ asset('js/index.js') }}"></script>
+@if(empty($filter['golongan']))
 <script type="text/javascript">
-  ajaxlink();
-
-  changeKategori($('[name=golongan]').val(), $('[name=bidang]'), 'bidang');
-
-@if(!empty($filter['golongan']))
-  changeKategori({{ $filter['golongan'] }}, $('[name=bidang]'), 'bidang');
-@endif
-
-@if(!empty($filter['bidang']))
-  changeKategori({{ $filter['bidang'] }}, $('[name=kelompok]'), 'kelompok');
-@endif
-
-  $('[name=golongan]').change(function(){
-    changeKategori($(this).val(), $('[name=bidang]'), 'bidang');
-  });
-
-  $('[name=bidang]').change(function(){
-    changeKategori($(this).val(), $('[name=kelompok]'), 'kelompok');
-  });
-
-  $('[name=kelompok]').change(function(){
-    $('#formFilter').submit();
-  });
-
-  $('.preview').each(function(){
-    $(this).click(function(){
-      BootstrapDialog.show({
-        type: BootstrapDialog.TYPE_INFO,
-        title: '<i class="fa fa-eye fa-fw"></i> Detail Asset',
-        message: function(dialog) {
-          var $message = $('<div></div>');
-          var pageToLoad = dialog.getData('pageToLoad');
-          $message.load(pageToLoad);
-
-          return $message;
-        },
-        data: {
-          'pageToLoad': $(this).data('href')
-        }
-      });
-    });
-  });
-
-  $('.hapus').each(function(){
-    $(this).click(function(){
-      var form = $(this).parents('form'),
-          barang = $(this).data('barang'),
-          result = {};
-
-      swal({
-        title: 'Apakah Anda yakin?',
-        text: "Anda akan menghapus data "+barang+"<br>Data yang dihapus tidak dapat dikembalikan",
-        type: 'warning',
-        showCancelButton: true,
-        allowOutsideClick: false,
-        confirmButtonColor: '#D9534F',
-        cancelButtonColor: '#394D5F',
-        confirmButtonText: 'Ya, hapus data ini!',
-        cancelButtonText: 'Batal',
-        preConfirm: function() {
-          return new Promise(function(resolve){
-            swal.enableLoading();
-            $.ajax({
-              url: form.prop('action'),
-              type: 'POST',
-              dataType: 'json',
-              data: form.serialize(),
-              success: function(data) {
-                result = data;
-                resolve();
-              }
-            });            
-          });
-        }
-      }).then(function(isConfirm) {
-        if (isConfirm) {
-          $('.right_col').load('/asset', function(){
-            swal({
-              title: 'Sukses!',
-              text: result.message,
-              type: result.status,
-              timer: 5000,
-              showCloseButton: true,
-              showConfirmButton: false,
-            });
-          });
-        }
-      })
-    });
-  });
+  changeKategori('', $('[name=bidang]'), 'bidang');
 </script>
+@endif

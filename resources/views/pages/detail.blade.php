@@ -50,7 +50,10 @@
     </tr>
     <tr>
       <td><strong>Harga</strong></td>
-      <td>Rp. {{ number_format($item->harga, 2, ',', '.') }} <br> {{ numspell($item->harga) }} Rupiah</td>
+      <td>
+        Rp. {{ number_format($item->harga, 2, ',', '.') }} <br>
+        <small>{{ numspell($item->harga) }} Rupiah</small>
+      </td>
     </tr>
     <tr>
       <td><strong>Keterangan</strong></td>

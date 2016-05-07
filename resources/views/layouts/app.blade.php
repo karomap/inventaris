@@ -12,8 +12,6 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
 
-    @stack('styles')
-
   </head>
 
   <body class="nav-md">
@@ -42,38 +40,5 @@
     <script src="{{ asset('js/core.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
-
-    @if (Session::has('flash_notification.message'))
-    <script type="text/javascript">
-      new PNotify({
-          title: "{{ Session::get('flash_notification.level') == 'success' ? 'Sukses!' : 'Error!' }}",
-          text: '{{ Session::get('flash_notification.message') }}',
-          type: '{{ Session::get('flash_notification.level') }}',
-          styling: 'bootstrap3'
-      });
-
-      swal({
-        title: "{{ Session::get('flash_notification.level') == 'success' ? 'Sukses!' : 'Error!' }}",
-        text: '{{ Session::get('flash_notification.message') }}',
-        type: '{{ Session::get('flash_notification.level') }}',
-        timer: 5000,
-        showCloseButton: true,
-        showConfirmButton: false,
-      });
-    </script>
-    @endif
-
-    @if($errors->any())
-    <script type="text/javascript">
-        new PNotify({
-            title: 'Error!',
-            text: '@foreach($errors->all() as $error) <p>{{ $error }}</p> @endforeach',
-            type: 'error',
-            styling: 'bootstrap3'
-        });
-    </script>
-    @endif
-
-    @stack('scripts')
   </body>
 </html>

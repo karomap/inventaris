@@ -1,6 +1,6 @@
 <div class="form-group">
   {!! Form::label('id_kategori', 'Nama / Jenis Barang') !!}
-  {!! Form::textarea('kategoris', isset($model) ? $model->kategori->parent('list') : null, ['class' => 'form-control input-sm', 'id' => 'kategoris', 'disabled', 'placeholder' => 'Nama / Jenis Barang belum dipilih', 'rows' => '3']) !!}
+  {!! Form::textarea('kategoris', null, ['class' => 'form-control input-sm', 'id' => 'kategoris', 'disabled', 'placeholder' => 'Nama / Jenis Barang belum dipilih', 'rows' => '3']) !!}
   {!! Form::hidden('id_kategori', null) !!}
   <span class="help-block"></span>
 
@@ -155,3 +155,9 @@
 </div>
 
 <script type="text/javascript" src="{{ asset('js/input.js') }}"></script>
+
+@if(isset($model))
+<script type="text/javascript">
+  $('[name=kategoris]').val("{!! $model->kategori->parent('list') !!}");
+</script>
+@endif

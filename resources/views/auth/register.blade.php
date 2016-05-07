@@ -2,7 +2,7 @@
 
 @section('content')
   {!! Form::open(['url' => '/register']) !!}
-    <h1>Pendaftaran Pengguna</h1>
+    <h1>Pendaftaran</h1>
     <div>
       {!! Form::text('name', null, ['class' => 'form-control', 'required', 'placeholder' => 'Nama']) !!}
     </div>

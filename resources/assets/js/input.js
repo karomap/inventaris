@@ -84,26 +84,20 @@ $('.yearpicker').datepicker({
   autoclose: true
 });
 
-$('.batal').click(function(e){
-  e.preventDefault();
-
-  if($(this).prop('href') != "") {
-    NProgress.start();
-    $('.right_col').load($(this).prop('href'), function(){
-      NProgress.done();
-      $('title').html($('.judul').html());
-    });
-  }
-});
-
-var form = $('#formAset');
+ajaxlink($('.batal'));
+ajaxlink($('.kembali'));
 
 $('.simpan').click(function(){
+  var $button = $(this),
+      $form = $('#formAset');
+
+  $button.button('loading');
+
   $.ajax({
-    url: form.prop('action'),
+    url: $form.prop('action'),
     type: 'POST',
     dataType: 'json',
-    data: form.serialize(),
+    data: $form.serialize(),
     success: function(data) {
       NProgress.start();
       $('.right_col').load('/asset', function(){
@@ -120,8 +114,9 @@ $('.simpan').click(function(){
       });
     },
     error: function(data) {
-      form.find('.has-error').removeClass('has-error');
-      form.find('span.help-block').html('');
+      $button.button('reset');
+      $form.find('.has-error').removeClass('has-error');
+      $form.find('span.help-block').html('');
 
       for (var $kolom in data.responseJSON) {
         $('[name='+$kolom+']').parents('.form-group').addClass('has-error');
