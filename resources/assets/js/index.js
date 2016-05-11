@@ -18,24 +18,33 @@ $('[name=golongan]').change(function(){
   changeKategori('', $('[name=kelompok]'), 'kelompok');
   changeKategori('', $('[name=subkelompok]'), 'subkelompok');
   changeKategori('', $('[name=kat]'), 'kategori');
+  $('#formFilter').submit();
 });
 
 $('[name=bidang]').change(function(){
   changeKategori($(this).val(), $('[name=kelompok]'), 'kelompok');
   changeKategori('', $('[name=subkelompok]'), 'subkelompok');
   changeKategori('', $('[name=kat]'), 'kategori');
+  $('#formFilter').submit();
 });
 
 $('[name=kelompok]').change(function(){
   changeKategori($(this).val(), $('[name=subkelompok]'), 'subkelompok');
   changeKategori('', $('[name=kat]'), 'kategori');
+  $('#formFilter').submit();
 });
 
 $('[name=subkelompok]').change(function(){
   changeKategori($(this).val(), $('[name=kat]'), 'kategori');
+  $('#formFilter').submit();
 });
 
 $('[name=kat]').change(function(){
+  $('#formFilter').submit();
+});
+
+$('.reset').click(function(){
+  $('#formFilter').find('input:visible, select').val('');
   $('#formFilter').submit();
 });
 
@@ -90,7 +99,7 @@ $('.hapus').each(function(){
               result = data;
               resolve();
             }
-          });            
+          });
         });
       }
     }).then(function(isConfirm) {

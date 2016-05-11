@@ -14,7 +14,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function index()
     {
       return view('layouts.app');
@@ -25,5 +25,12 @@ class HomeController extends Controller
       $golongan = Golongan::get();
 
       return view('home', compact('golongan'));
+    }
+
+    public function profil()
+    {
+      $user = \Auth::user();
+
+      return view('pages.profil', compact('user'));
     }
 }

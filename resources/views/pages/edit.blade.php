@@ -1,15 +1,11 @@
-<script type="text/javascript">
-  if (document.getElementsByClassName("right_col").length < 1) {
-    document.location.replace('/');
-  }
-</script>
-
 <div class="page-title">
   <div class="title_left">
     <h3 class="judul">Edit Aset</h3>
   </div>
-  <div class="pull-right">
-    <a class="kembali btn btn-dark btn-sm" href="{{ route('inventaris.index') }}"><i class="fa fa-angle-double-left"></i> Kembali</a>
+  <div class="title_right">
+    <div class="pull-right">
+      <a class="kembali btn btn-dark btn-sm" href="{{ route('inventaris.index') }}"><i class="fa fa-angle-double-left"></i> Kembali</a>
+    </div>
   </div>
 </div>
 <div class="clearfix"></div>

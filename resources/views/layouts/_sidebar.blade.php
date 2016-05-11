@@ -26,34 +26,13 @@
       <div class="menu_section">
         <h3>Menu</h3>
         <ul class="nav side-menu">
-          <li class="dashboard"><a href="{{ url('/dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard </span></a></li>
-          <li class="parent-menu"><a><i class="fa fa-list"></i> Manajemen Asset <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-              <li class="daftar-aset"><a href="{{ route('inventaris.index') }}">Daftar Asset</a></li>
-              <li class="aset-baru"><a href="{{ route('inventaris.baru') }}">Asset Baru</a></li>
-            </ul>
-          </li>
+          <li class="dashboard"><a href="{{ url('/dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+          <li class="daftar-aset"><a href="{{ route('inventaris.index') }}"><i class="fa fa-cubes"></i>  Daftar Asset</a></li>
+          <li class="aset-baru"><a href="{{ route('inventaris.baru') }}"><i class="fa fa-plus"></i> Asset Baru</a></li>
         </ul>
       </div>
 
     </div>
     <!-- /sidebar menu -->
-
-    <!-- /menu footer buttons -->
-    <div class="sidebar-footer hidden-small">
-      <a data-toggle="tooltip" data-placement="top" title="Settings">
-        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-      </a>
-      <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-      </a>
-      <a data-toggle="tooltip" data-placement="top" title="Lock">
-        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-      </a>
-      <a data-toggle="tooltip" data-placement="top" title="Logout">
-        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-      </a>
-    </div>
-    <!-- /menu footer buttons -->
   </div>
 </div>

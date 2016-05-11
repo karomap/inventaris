@@ -44,9 +44,47 @@ class InventarisController extends Controller
             $cond .= " AND id_kategori = {$request->kat}";
         }
 
+        if(!empty($request->keadaan)) {
+            $cond .= " AND keadaan = '{$request->keadaan}'";
+        }
+
         if(!empty($request->keyword)) {
             $keyword = strtolower($request->keyword);
             $cond .= " AND LOWER(merk_type) LIKE '%{$keyword}%'";
+        }
+
+        if(!empty($request->order)) {
+            switch($request->order) {
+                case 'typeA':
+                    $order = 'merk_type';
+                    $order_state = 'asc';
+                    break;
+
+                case 'typeZ':
+                    $order = 'merk_type';
+                    $order_state = 'desc';
+                    break;
+
+                case 'asal':
+                    $order = 'asal';
+                    $order_state = 'asc';
+                    break;
+
+                case 'keadaan':
+                    $order = 'keadaan';
+                    $order_state = 'asc';
+                    break;
+
+                case 'terlama':
+                    $order = 'updated_at';
+                    $order_state = 'asc';
+                    break;
+
+                default:
+                    $order = 'updated_at';
+                    $order_state = 'desc';
+                    break;
+            }
         }
 
         $items = Item::orderBy($order, $order_state)->whereRaw($cond)->paginate(25);

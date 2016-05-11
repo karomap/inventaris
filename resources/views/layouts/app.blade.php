@@ -12,6 +12,21 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
 
+    <style type="text/css">
+      .col-md-3.left_col {
+        position: fixed !important;
+      }
+      input[type=number]::-webkit-outer-spin-button,
+      input[type=number]::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+
+      input[type=number] {
+          -moz-appearance:textfield;
+      }
+    </style>
+
   </head>
 
   <body class="nav-md">

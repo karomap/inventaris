@@ -16,7 +16,13 @@
           </a>
           <ul class="dropdown-menu dropdown-usermenu pull-right">
             <li>
-              <a class="keluar" data-href="{{ url('/logout') }}"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+              <a class="profil" href="{{ route('profil') }}"><i class="fa fa-user pull-right"></i> Profil</a>
+            </li>
+            <li>
+              <a class="pengaturan" href="{{ url('/logout') }}"><i class="fa fa-cogs pull-right"></i> Pengaturan</a>
+            </li>
+            <li>
+              <a class="keluar" data-href="{{ url('/logout') }}"><i class="fa fa-sign-out pull-right"></i> Keluar</a>
             </li>
           </ul>
         </li>

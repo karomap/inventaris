@@ -100,7 +100,7 @@
 
         <hr>
         <div class="pull-left">
-          Total : {{ numspell($total) }} Rupiah
+          Total : {{ spell($total) }} Rupiah
         </div>
         <div class="pull-right">
           <span class="badge">Total : Rp. {{ number_format($total, 2, ',', '.') }}</span>

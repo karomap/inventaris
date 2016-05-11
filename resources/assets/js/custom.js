@@ -4,15 +4,15 @@ function boxTool() {
             var $BOX_PANEL = $(this).closest('.x_panel'),
                 $ICON = $(this).find('i'),
                 $BOX_CONTENT = $BOX_PANEL.find('.x_content');
-            
+
             // fix for some div with hardcoded fix class
             if ($BOX_PANEL.attr('style')) {
                 $BOX_CONTENT.slideToggle(200, function(){
                     $BOX_PANEL.removeAttr('style');
                 });
             } else {
-                $BOX_CONTENT.slideToggle(200); 
-                $BOX_PANEL.css('height', 'auto');  
+                $BOX_CONTENT.slideToggle(200);
+                $BOX_PANEL.css('height', 'auto');
             }
 
             $ICON.toggleClass('fa-chevron-up fa-chevron-down');
@@ -44,8 +44,8 @@ var URL = window.location,
             if($(this).prop('href') != "") {
               NProgress.start();
               $('.right_col').load($(this).prop('href'), function(){
-                NProgress.done();
                 $('title').html($('.judul').html());
+                NProgress.done();
               });
             }
           });
@@ -59,8 +59,8 @@ var URL = window.location,
         if(selector.prop('href') != "") {
           NProgress.start();
           $('.right_col').load(selector.prop('href'), function(){
-            NProgress.done();
             $('title').html($('.judul').html());
+            NProgress.done();
           });
         }
       });
@@ -78,15 +78,18 @@ $(document).ready(function() {
     if($('.right_col').html() == "") {
       NProgress.start();
       $('.right_col').load("/dashboard", function(){
-        NProgress.done();
         $('title').html($('.judul').html());
         $('li.dashboard').addClass('active');
+        NProgress.done();
       });
     }
 
     ajaxlinks();
 
     setContentHeight();
+
+    ajaxlink($('a.profil'));
+    ajaxlink($('a.pengaturan'));
 
     $SIDEBAR_MENU.find('a').on('click', function(e){
         var $li = $(this).parent();
@@ -132,7 +135,7 @@ $(document).ready(function() {
     });
 
     // recompute content when resizing
-    $(window).smartresize(function(){  
+    $(window).smartresize(function(){
         setContentHeight();
     });
 

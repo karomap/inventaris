@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class Admin
+class AjaxOnly
 {
     /**
      * Handle an incoming request.
@@ -13,18 +13,12 @@ class Admin
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $admin)
+    public function handle($request, Closure $next)
     {
-        if ($request->user()->isAdmin()) {
+        if ($request->ajax() || $request->wantsJson()) {
             return $next($request);
         } else {
-            if ($request->ajax() || $request->wantsJson()) {
-                return response(403, 'Forbidden');
-            }
-
-            return abort(403, 'Forbidden');
+            return redirect('/');
         }
-
-
     }
 }
