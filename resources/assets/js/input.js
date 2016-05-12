@@ -1,8 +1,3 @@
-changeKategori($('[name=golongan]').val(), $('[name=bidang]'), 'bidang');
-changeKategori($('[name=bidang]').val(), $('[name=kelompok]'), 'kelompok');
-changeKategori($('[name=kelompok]').val(), $('[name=subkelompok]'), 'subkelompok');
-changeKategori($('[name=subkelompok]').val(), $('[name=kat]'), 'kategori');
-
 $('[name=golongan]').change(function(){
   changeKategori($(this).val(), $('[name=bidang]'), 'bidang');
 });

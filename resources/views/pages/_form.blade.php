@@ -16,7 +16,7 @@
       </a>
       <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
         <div class="panel-body">
-          <div class="input-group"> 
+          <div class="input-group">
             {!! Form::text('findkategori', null, ['class' => 'form-control input-sm', 'placeholder' => 'Pencarian']) !!}
             <span class="input-group-addon"><i class="fa fa-search"></i></span>
           </div>
@@ -34,29 +34,29 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-md-6 col-xs-12">
-              {!! Form::select('golongan', ['' => '-- Pilih Golongan --']+listKategori('golongan'), null, ['class' => 'form-control input-sm']) !!}
+              {!! Form::select('golongan', ['' => '-- Pilih Golongan --']+listKategori('golongan'), isset($model) ? $model->kategori->subkelompok->kelompok->bidang->golongan->id : null, ['class' => 'form-control input-sm']) !!}
               <p class="help-blok">Golongan</p>
             </div>
             <div class="col-md-6 col-xs-12">
-              {!! Form::select('bidang', ['' => ''], null, ['class' => 'form-control input-sm']) !!}
+              {!! Form::select('bidang', isset($model) ? listKategori('bidang', $model->kategori->subkelompok->kelompok->bidang->golongan->id) : ['' => '-- Pilih Salah Satu --'], isset($model) ? $model->kategori->subkelompok->kelompok->bidang->id : null, ['class' => 'form-control input-sm', isset($model) ? '' : 'disabled']) !!}
               <p class="help-blok">Bidang</p>
             </div>
           </div>
-            
+
           <div class="row">
             <div class="col-md-6 col-xs-12">
-              {!! Form::select('kelompok', ['' => ''], null, ['class' => 'form-control input-sm']) !!}
+              {!! Form::select('kelompok', isset($model) ? listKategori('kelompok', $model->kategori->subkelompok->kelompok->bidang->id) : ['' => '-- Pilih Salah Satu --'], isset($model) ? $model->kategori->subkelompok->kelompok->id : null, ['class' => 'form-control input-sm', isset($model) ? '' : 'disabled']) !!}
               <p class="help-blok">Kelompok</p>
             </div>
             <div class="col-md-6 col-xs-12">
-              {!! Form::select('subkelompok', ['' => ''], null, ['class' => 'form-control input-sm']) !!}
+              {!! Form::select('subkelompok', isset($model) ? listKategori('subkelompok', $model->kategori->subkelompok->kelompok->id) : ['' => '-- Pilih Salah Satu --'], isset($model) ? $model->kategori->subkelompok->id : null, ['class' => 'form-control input-sm', isset($model) ? '' : 'disabled']) !!}
               <p class="help-blok">Sub Kelompok</p>
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-12 col-xs-12">
-              {!! Form::select('kat', ['' => ''], null, ['class' => 'form-control input-sm']) !!}
+              {!! Form::select('kat', isset($model) ? listKategori('kat', $model->kategori->subkelompok->id) : ['' => '-- Pilih Salah Satu --'], isset($model) ? $model->id_kategori : null, ['class' => 'form-control input-sm', isset($model) ? '' : 'disabled']) !!}
               <p class="help-blok">Nama / Jenis Barang</p>
             </div>
           </div>

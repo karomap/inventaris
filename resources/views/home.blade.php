@@ -40,7 +40,7 @@
 <!-- /top tiles -->
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-xs-12">
     <div class="x_panel">
       <div class="x_title">
         <h2>Statistik</h2>
@@ -71,8 +71,8 @@
               <tr>
                 <th class="text-center">Kode</th>
                 <th class="text-center">Bidang</th>
-                <th class="text-center">Jumlah Barang</th>
-                <th class="text-center">Jumlah Harga (Rp.)</th>
+                <th class="text-center">Jumlah</th>
+                <th class="text-center">Harga (Rp.)</th>
               </tr>
             </thead>
             <tbody>

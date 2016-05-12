@@ -156,7 +156,7 @@
 .nav-sm .menu_section {
   margin: 0;
 }
-.nav-sm span.fa, 
+.nav-sm span.fa,
 .nav-sm .menu_section h3 {
   display: none;
 }
@@ -168,12 +168,13 @@
   background: #EDEDED;
   border-bottom: 1px solid #D9DEE4;
   margin-bottom: 10px;
-  width: 100%;
-  position: relative;
+  position: fixed;
+  z-index: 2000;
+  display: none;
 }
 @media (min-width: 480px) {
   .nav_menu {
-    position: static;
+    position: fixed;
   }
 }
 .nav-md .container.body .col-md-3.left_col {

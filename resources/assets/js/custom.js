@@ -88,6 +88,13 @@ $(document).ready(function() {
 
     setContentHeight();
 
+    $NAV_MENU.css('width', $RIGHT_COL.css('width'));
+    $NAV_MENU.slideDown('slow');
+
+    $(window).resize(function(){
+        $NAV_MENU.css('width', $RIGHT_COL.css('width'));
+    });
+
     ajaxlink($('a.profil'));
     ajaxlink($('a.pengaturan'));
 
@@ -131,6 +138,7 @@ $(document).ready(function() {
             }
         }
 
+        $NAV_MENU.css('width', $RIGHT_COL.css('width'));
         setContentHeight();
     });
 

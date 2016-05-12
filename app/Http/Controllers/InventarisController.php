@@ -87,7 +87,16 @@ class InventarisController extends Controller
             }
         }
 
-        $items = Item::orderBy($order, $order_state)->whereRaw($cond)->paginate(25);
+        if ($request->download == csrf_token()) {
+            try {
+                download($cond, $order, $order_state);
+            } catch (ErrorException $e) {
+                Session::flash('notif', $e);
+                Session::flash('notif-level', 'error');
+            }
+        }
+
+        $items = Item::whereRaw($cond)->orderBy($order, $order_state)->paginate(25);
         $filter = $request->except(['_token']);
 
         return view('pages.index', compact(['items', 'filter']));
@@ -292,10 +301,34 @@ class InventarisController extends Controller
                 }
                 return response(collect($result));
                 break;
-            
+
             default:
                 # code...
                 break;
         }
+    }
+
+    private function download($cond, $order, $order_state)
+    {
+        $data = Item::whereRaw($cond)->orderBy($order, $order_state)->get();
+
+        foreach ($data as $key => $item) {
+            $item->kelamin = setting('list_kelamin')[$item->kelamin];
+            $item->warganegara = setting('list_warganegara')[$item->warganegara];
+            $item->agama = setting('list_agama')[$item->agama];
+            $item->pekerjaan = setting('list_pekerjaan')[$item->pekerjaan];
+            $item->pendidikan = setting('list_pendidikan')[$item->pendidikan];
+            $item->status = setting('list_status')[$item->status];
+            $item->shdk = setting('list_shdk')[$item->shdk];
+            $items[$key] = $item;
+        }
+
+        $unduh = collect($items);
+
+        \Excel::create('Penduduk_'.date('Y_m_d_His'), function($excel) use($unduh) {
+            $excel->sheet('Penduduk', function($sheet) use($unduh) {
+                $sheet->fromArray($unduh);
+            });
+        })->download('xlsx');
     }
 }
