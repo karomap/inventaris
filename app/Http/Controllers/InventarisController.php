@@ -8,6 +8,7 @@ use App\Item;
 use App\Kategori;
 use App\Kelompok;
 use App\SubKelompok;
+use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
@@ -23,6 +24,7 @@ class InventarisController extends Controller
         $cond = "1";
         $order = "updated_at";
         $order_state = "desc";
+        $pg = 25;
 
         if(!empty($request->golongan)) {
             $cond .= " AND id_kategori LIKE '{$request->golongan}%'";
@@ -51,6 +53,14 @@ class InventarisController extends Controller
         if(!empty($request->keyword)) {
             $keyword = strtolower($request->keyword);
             $cond .= " AND LOWER(merk_type) LIKE '%{$keyword}%'";
+        }
+
+        if(!empty($request->tanggal)) {
+            $tanggal = explode(' - ', $request->tanggal);
+            list($start,$end) = $tanggal;
+            $dari = Carbon::createFromFormat('d/m/Y H:i:s', $start.' 00:00:00');
+            $sampai = Carbon::createFromFormat('d/m/Y H:i:s', $end.' 23:59:59');
+            $cond .= " AND updated_at BETWEEN '".$dari."' AND '".$sampai."'";
         }
 
         if(!empty($request->order)) {
@@ -87,16 +97,20 @@ class InventarisController extends Controller
             }
         }
 
-        if ($request->download == csrf_token()) {
-            try {
-                download($cond, $order, $order_state);
-            } catch (ErrorException $e) {
-                Session::flash('notif', $e);
-                Session::flash('notif-level', 'error');
-            }
+        if (!empty($request->pg)) {
+            $pg = $request->pg;
         }
 
-        $items = Item::whereRaw($cond)->orderBy($order, $order_state)->paginate(25);
+        if ($request->download == csrf_token()) {
+            $this->download($cond, $order, $order_state);
+        }
+
+        if ($request->print == csrf_token()) {
+            $items = Item::whereRaw($cond)->orderBy($order, $order_state)->get();
+            return view('pages.print', compact('items'));
+        }
+
+        $items = Item::whereRaw($cond)->orderBy($order, $order_state)->paginate($pg);
         $filter = $request->except(['_token']);
 
         return view('pages.index', compact(['items', 'filter']));
@@ -313,21 +327,39 @@ class InventarisController extends Controller
         $data = Item::whereRaw($cond)->orderBy($order, $order_state)->get();
 
         foreach ($data as $key => $item) {
-            $item->kelamin = setting('list_kelamin')[$item->kelamin];
-            $item->warganegara = setting('list_warganegara')[$item->warganegara];
-            $item->agama = setting('list_agama')[$item->agama];
-            $item->pekerjaan = setting('list_pekerjaan')[$item->pekerjaan];
-            $item->pendidikan = setting('list_pendidikan')[$item->pendidikan];
-            $item->status = setting('list_status')[$item->status];
-            $item->shdk = setting('list_shdk')[$item->shdk];
-            $items[$key] = $item;
+            $items[] = [
+                $key+1,
+                formatKode(str_pad($item->id_kategori, 10, '0', STR_PAD_LEFT)),
+                str_pad($item->register, 3, '0', STR_PAD_LEFT),
+                $item->kategori->uraian,
+                $item->merk_type,
+                $item->no_spcm,
+                $item->bahan,
+                ucfirst($item->asal),
+                $item->tahun,
+                $item->ukuran_konstruksi,
+                $item->satuan,
+                ['b' => 'Baik', 'kb' => 'Kurang Baik', 'rb' => 'Rusak Berat'][$item->keadaan],
+                $item->jumlah,
+                $item->harga,
+                $item->keterangan,
+                $item->created_at,
+                $item->updated_at
+            ];
         }
 
-        $unduh = collect($items);
-
-        \Excel::create('Penduduk_'.date('Y_m_d_His'), function($excel) use($unduh) {
-            $excel->sheet('Penduduk', function($sheet) use($unduh) {
-                $sheet->fromArray($unduh);
+        \Excel::create('Aset_'.date('Y_m_d_His'), function($excel) use($items) {
+            $excel->sheet('Aset', function($sheet) use($items) {
+                $sheet->fromArray($items);
+                $sheet->row(1, [
+                    'No', 'Kode Barang', 'Register', 'Nama / Jenis Barang', 'Merk / Type', 'No. SPCM', 'Bahan',
+                    'Asal / Cara Perolehan', 'Tahun Pembelian', 'Ukuran Barang / Konstruksi', 'Satuan', 'Keadaan',
+                    'Jumlah Barang', 'Jumlah Harga', 'Keterangan', 'Dibuat', 'Diupdate'
+                ]);
+                $sheet->setColumnFormat([
+                    'B' => '@',
+                    'C' => '@'
+                ]);
             });
         })->download('xlsx');
     }

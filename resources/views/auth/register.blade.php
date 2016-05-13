@@ -3,6 +3,15 @@
 @section('content')
   {!! Form::open(['url' => '/register']) !!}
     <h1>Pendaftaran</h1>
+
+    @if($errors->any())
+      <div class="alert alert-danger">
+        @foreach($errors->all() as $error)
+          <p>{{ $error }}</p>
+        @endforeach
+      </div>
+    @endif
+    
     <div>
       {!! Form::text('name', null, ['class' => 'form-control', 'required', 'placeholder' => 'Nama']) !!}
     </div>

@@ -11,14 +11,22 @@
 |
 */
 
-Route::auth();
+Route::group(['namespace' => 'Auth'], function(){
+  Route::get('login', 'AuthController@showLoginForm');
+  Route::post('login', 'AuthController@login');
+  Route::get('logout', 'AuthController@logout');
+});
 
 Route::group(['middleware' => 'auth'], function() {
   Route::get('/', 'HomeController@index');
+  Route::get('download', ['as' => 'download', 'uses' => 'InventarisController@index']);
+  Route::get('print', ['as' => 'print', 'uses' => 'InventarisController@index']);
 
   Route::group(['middleware' => 'ajaxonly'], function(){
     Route::get('dashboard', 'HomeController@dashboard');
     Route::get('profil', ['as' => 'profil', 'uses' => 'HomeController@profil']);
+    Route::resource('pengguna', 'UserController', ['except' => ['index', 'show']]);
+    Route::post('upload', ['as' => 'avatar.upload', 'uses' => 'UserController@fileUpload']);
 
     Route::get('asset', ['as' => 'inventaris.index', 'uses' => 'InventarisController@index']);
     Route::post('asset', ['as' => 'inventaris.filter', 'uses' => 'InventarisController@index']);

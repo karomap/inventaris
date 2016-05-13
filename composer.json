@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "doctrine/dbal": "^2.5",
         "laravelcollective/html": "^5.2",
-        "maatwebsite/excel": "^2.1"
+        "maatwebsite/excel": "^2.1",
+        "dompdf/dompdf": "~0.6.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

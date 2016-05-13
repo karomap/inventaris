@@ -3,19 +3,23 @@
 @section('content')
   {!! Form::open(['url' => '/login']) !!}
     <h1>Login Pengguna</h1>
+
+    @if($errors->any())
+      <div class="alert alert-danger">
+        @foreach($errors->all() as $error)
+          <p>{{ $error }}</p>
+        @endforeach
+      </div>
+    @endif
+
     <div>
-      {!! Form::email('email', null, ['class' => 'form-control', 'required']) !!}
+      {!! Form::email('email', null, ['class' => 'form-control', 'required', 'placeholder' => 'Email']) !!}
     </div>
     <div>
-      {!! Form::password('password', ['class' => 'form-control', 'required']) !!}
-    </div>
-    <div class="checkbox">
-      <label>
-          <input type="checkbox" name="remember"> Ingat saya
-      </label>
+      {!! Form::password('password', ['class' => 'form-control', 'required', 'placeholder' => 'Password']) !!}
     </div>
     <div>
-      <a href="{{ url('/register') }}">Daftar</a>
+      <!-- <a href="{{ url('/register') }}">Daftar</a> -->
       {!! Form::button('Masuk', ['class' => 'btn btn-default submit', 'type' => 'submit']) !!}
     </div>
     <div class="clearfix"></div>

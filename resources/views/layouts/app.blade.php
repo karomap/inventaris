@@ -27,6 +27,11 @@
       }
     </style>
 
+    <script>
+      var nw = require('nw.gui');
+      var win = nw.Window.get();
+    </script>
+
   </head>
 
   <body class="nav-md">
@@ -55,5 +60,10 @@
     <script src="{{ asset('js/core.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+    <script>
+      $(document).ready(function(){
+        win.maximize();
+      });
+    </script>
   </body>
 </html>

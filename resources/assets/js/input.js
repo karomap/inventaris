@@ -96,13 +96,14 @@ $('.simpan').click(function(){
     success: function(data) {
       NProgress.start();
       $('.right_col').load('/asset', function(){
-        NProgress.done();
         $('title').html($('.judul').html());
+        setActive();
+        NProgress.done();
         swal({
           title: 'Sukses!',
           text: data.message,
           type: data.status,
-          timer: 5000,
+          timer: 2000,
           showCloseButton: true,
           showConfirmButton: false,
         });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Golongan;
 use App\Http\Requests;
+use App\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -29,8 +30,9 @@ class HomeController extends Controller
 
     public function profil()
     {
+      $items = Item::orderBy('updated_at', 'desc')->take(10)->get();
       $user = \Auth::user();
 
-      return view('pages.profil', compact('user'));
+      return view('pages.profil', compact(['user', 'items']));
     }
 }

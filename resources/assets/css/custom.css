@@ -8,7 +8,7 @@
   visibility: hidden;
 }
 .nav-sm .container.body .right_col {
-  padding: 10px 20px;
+  padding: 50px 20px;
   margin-left: 70px;
   z-index: 2;
 }
@@ -169,7 +169,7 @@
   border-bottom: 1px solid #D9DEE4;
   margin-bottom: 10px;
   position: fixed;
-  z-index: 2000;
+  z-index: 1000;
   display: none;
 }
 @media (min-width: 480px) {
@@ -187,7 +187,7 @@ body .container.body .right_col {
   background: #F7F7F7;
 }
 .nav-md .container.body .right_col {
-  padding: 10px 20px 0;
+  padding: 50px 20px 0;
   margin-left: 230px;
 }
 .nav_title {
@@ -242,6 +242,9 @@ body .container.body .right_col {
 }
 .aero {
   color: #9CC2CB;
+}
+.yellow {
+  color: #EC971F;
 }
 .red {
   color: #E74C3C;
@@ -4459,10 +4462,6 @@ ul.notifications {
   overflow: hidden;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-}
-
-.daterangepicker.opensright .ranges, .daterangepicker.opensright .calendar, .daterangepicker.openscenter .ranges, .daterangepicker.openscenter .calendar {
-  float: right;
 }
 
 .daterangepicker.dropdown-menu .calendar {}

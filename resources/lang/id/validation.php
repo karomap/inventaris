@@ -35,7 +35,7 @@ return [
     'digits'               => 'Kolom :attribute harus :digits digits.',
     'digits_between'       => 'Kolom :attribute harus diantara :min dan :max digits.',
     'distinct'             => 'Kolom :attribute field has a duplicate value.',
-    'email'                => 'Kolom :attribute harus a valid email address.',
+    'email'                => 'Kolom :attribute harus berisi alamat email yang valid.',
     'exists'               => 'The selected :attribute tidak valid.',
     'filled'               => 'Kolom :attribute harus diisi.',
     'image'                => 'Kolom :attribute harus an image.',

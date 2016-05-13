@@ -46,7 +46,7 @@ class Kategori extends Model
 
         case 'list':
           return $golongan.' > '.$bidang.' > '.$kelompok.'\n'.$subkelompok.' > '.$kategori;
-        
+
         default:
           return collect(compact(['golongan', 'bidang', 'kelompok', 'subkelompok', 'kategori']));
           break;

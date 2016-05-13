@@ -35,6 +35,53 @@ var URL = window.location,
     $RIGHT_COL = $('.right_col'),
     $NAV_MENU = $('.nav_menu'),
     $FOOTER = $('footer'),
+    $ACTIVE = 'dashboard',
+
+    setActive = function() {
+        $ACTIVE = $('#activePage').html();
+
+        if($BODY.hasClass('nav-md')) {
+            $SIDEBAR_MENU.find('.active').removeClass('active');
+
+            switch ($ACTIVE) {
+                case 'dashboard':
+                    $('li.dashboard').addClass('active');
+                    break;
+
+                case 'daftar-aset':
+                    $('li.daftar-aset').addClass('active');
+                    break;
+
+                case 'aset-baru':
+                    $('li.aset-baru').addClass('active');
+                    break;
+
+                default:
+                    $SIDEBAR_MENU.find('.active-sm').removeClass('active');
+                    break;
+            }
+        } else {
+            $SIDEBAR_MENU.find('.active-sm').removeClass('active-sm');
+
+            switch ($ACTIVE) {
+                case 'dashboard':
+                    $('li.dashboard').addClass('active-sm');
+                    break;
+
+                case 'daftar-aset':
+                    $('li.daftar-aset').addClass('active-sm');
+                    break;
+
+                case 'aset-baru':
+                    $('li.aset-baru').addClass('active-sm');
+                    break;
+
+                default:
+                    $SIDEBAR_MENU.find('.active-sm').removeClass('active-sm');
+                    break;
+            }
+        }
+    },
 
     ajaxlinks = function() {
         $('.left_col a').each(function(){
@@ -45,6 +92,7 @@ var URL = window.location,
               NProgress.start();
               $('.right_col').load($(this).prop('href'), function(){
                 $('title').html($('.judul').html());
+                setActive();
                 NProgress.done();
               });
             }
@@ -60,6 +108,7 @@ var URL = window.location,
           NProgress.start();
           $('.right_col').load(selector.prop('href'), function(){
             $('title').html($('.judul').html());
+            setActive();
             NProgress.done();
           });
         }
@@ -79,7 +128,7 @@ $(document).ready(function() {
       NProgress.start();
       $('.right_col').load("/dashboard", function(){
         $('title').html($('.judul').html());
-        $('li.dashboard').addClass('active');
+        setActive();
         NProgress.done();
       });
     }
@@ -98,29 +147,6 @@ $(document).ready(function() {
     ajaxlink($('a.profil'));
     ajaxlink($('a.pengaturan'));
 
-    $SIDEBAR_MENU.find('a').on('click', function(e){
-        var $li = $(this).parent();
-
-        if ($li.parent().hasClass('child_menu')) {
-            $li.parent().find('.active').removeClass('active');
-            $li.addClass('active');
-        } else {
-            if ($li.children('.child_menu').length) {
-                $li.parent().find('.active').not($li).removeClass('active');
-                $li.toggleClass('active');
-                $li.children('.child_menu').slideToggle(function(){
-                    setContentHeight();
-                });
-            } else {
-                $li.parent().find('.active').removeClass('active');
-                $li.parent().find('.child_menu').slideUp(function(){
-                    setContentHeight();
-                });
-                $li.addClass('active');
-            }
-        }
-    });
-
     // toggle small or large menu
     $MENU_TOGGLE.on('click', function() {
         if ($BODY.hasClass('nav-md')) {
@@ -130,12 +156,16 @@ $(document).ready(function() {
             if ($SIDEBAR_MENU.find('li').hasClass('active')) {
                 $SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
             }
+
+            setActive();
         } else {
             $BODY.removeClass('nav-sm').addClass('nav-md');
 
             if ($SIDEBAR_MENU.find('li').hasClass('active-sm')) {
                 $SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
             }
+
+            setActive();
         }
 
         $NAV_MENU.css('width', $RIGHT_COL.css('width'));
@@ -177,7 +207,7 @@ $(document).ready(function() {
             function delayed () {
                 if (!execAsap)
                     func.apply(obj, args);
-                timeout = null; 
+                timeout = null;
             }
 
             if (timeout)
@@ -185,7 +215,7 @@ $(document).ready(function() {
             else if (execAsap)
                 func.apply(obj, args);
 
-            timeout = setTimeout(delayed, threshold || 100); 
+            timeout = setTimeout(delayed, threshold || 100);
         };
     };
 

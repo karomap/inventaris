@@ -26,5 +26,7 @@
         </div>
       </div>
     </div>
+
+    <script src="{{ asset('js/core.js') }}"></script>
   </body>
 </html>

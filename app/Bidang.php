@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Item;
+use App\Rekap;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -21,6 +22,11 @@ class Bidang extends Model
       return $this->hasMany('App\Kelompok', 'id_bidang');
     }
 
+    public function rekap()
+    {
+      return $this->hasMany('App\Rekap', 'id_bidang');
+    }
+
     public function jumlah()
     {
       $id = $this->attributes['id'];
@@ -28,10 +34,24 @@ class Bidang extends Model
       return $item[0]->jumlah;
     }
 
+    public function jumlahRekap()
+    {
+      $id = $this->attributes['id'];
+      $item = Rekap::select('jumlah')->whereRaw("id_bidang = {$id} AND EXTRACT(YEAR FROM created_at) = EXTRACT(YEAR FROM now()) - 1")->get();
+      return $item[0]->jumlah;
+    }
+
     public function harga()
     {
       $id = $this->attributes['id'];
       $item = Item::select(DB::raw('SUM(harga) as harga'))->whereRaw("id_kategori LIKE '{$id}%'")->get();
+      return $item[0]->harga;
+    }
+
+    public function hargaRekap()
+    {
+      $id = $this->attributes['id'];
+      $item = Rekap::select('harga')->whereRaw("id_bidang = {$id} AND EXTRACT(YEAR FROM created_at) = EXTRACT(YEAR FROM now()) - 1")->get();
       return $item[0]->harga;
     }
 }

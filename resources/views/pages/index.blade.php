@@ -1,3 +1,5 @@
+<div id="activePage" class="hidden">daftar-aset</div>
+
 <div class="page-title">
   <div class="title_left">
     <h3 class="judul" data-current="daftar-aset">Daftar Aset</h3>
@@ -51,61 +53,80 @@
     <br>
 
     <div class="row">
-      <div class="col-md-3 col-xs-12">
+      <div class="col-md-4 col-xs-12">
         <div class="input-group">
           {!! Form::text('keyword', null, ['class' => 'form-control input-sm', 'placeholder' => 'Pencarian Merk/Type']) !!}
           <a onclick="$('#formFilter').submit()" class="cari btn btn-default btn-sm input-group-addon"><i class="fa fa-search"></i></a>
         </div>
       </div>
-      <div class="col-md-3 col-xs-12">
+      <div class="col-md-4 col-xs-12">
         <div class="input-group">
           <span class="input-group-addon">Keadaan</span>
           {!! Form::select('keadaan', ['' => 'Semua', 'b' => 'Baik', 'kb' => 'Kurang Baik', 'rb' => 'Rusak Berat'], null, ['class' => 'form-control input-sm', 'onchange' => '$("#formFilter").submit()']) !!}
         </div>
       </div>
-      <div class="col-md-3 col-xs-12">
+      <div class="col-md-2 col-xs-12 text-right">
+        <button type="reset" class="reset btn btn-warning btn-sm"><i class="fa fa-refresh"></i> Setel Ulang</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 col-xs-12">
         <div class="input-group">
-          <span class="input-group-addon">Urutkan</span>
+          <span class="input-group-addon"><i class="fa fa-sort-amount-desc"></i></span>
           {!! Form::select('order', ['terbaru' => 'Terbaru', 'terlama' => 'Terlama' ,'typeA' => 'Merk/Type [A-Z]', 'typeZ' => 'Merk/Type [Z-A]', 'asal' => 'Asal', 'keadaan' => 'Keadaan'], null, ['class' => 'form-control input-sm', 'onchange' => '$("#formFilter").submit()']) !!}
         </div>
       </div>
-      <div class="col-md-3 col-xs-12 text-right">
-        <button type="reset" class="reset btn btn-default btn-sm"><i class="fa fa-refresh"></i> Setel Ulang</button>
-        {!! Form::button('<i class="fa fa-filter"></i> Saring', ['class' => 'btn btn-warning btn-sm', 'form' => 'formFilter', 'type' => 'submit']) !!}
+      <div class="col-md-2 col-xs-12">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-eye"></i></span>
+          {!! Form::select('pg', [25 => 25, 50 => 50, 100 => 100], null, ['class' => 'form-control input-sm', 'onchange' => '$("#formFilter").submit()']) !!}
+        </div>
+      </div>
+      <div class="col-md-4 col-xs-12">
+          {!! Form::text('tanggal', null, ['class' => 'form-control input-sm rentangtanggal', 'readonly', 'placeholder' => 'Tanggal Dibuat', 'style' => 'background: #fff;cursor:pointer']) !!}
       </div>
     </div>
   {!! Form::close() !!}
 </div>
+<br>
 
 <div class="row">
   <div class="col-xs-12">
     <div class="x_panel">
-      <div class="x_title">
-        <h2>Jumlah : {{ $items->total() }}</h2>
-
-        <ul class="nav navbar-right panel_toolbox">
-          <li style="float: right;"><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-        </ul>
-
-        <div class="clearfix"></div>
+      <div class="row x_title">
+        <div class="col-md-4 col-xs-4">
+          <h2>Jumlah : {{ $items->total() }}</h2>
+        </div>
+        <div class="col-md-4 col-xs-4">
+        </div>
+        <div class="col-md-4 col-xs-4">
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="print" href=""><div class="blue"><i class="fa fa-print"></i> Cetak</div></a></li>
+            <li><a class="download" data-file="xlsx" href=""><div class="green"><i class="fa fa-file-excel-o"></i> Unduh Excel</div></a></li>
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+          </ul>
+        </div>
       </div>
+
+      <div class="clearfix"></div>
 
       <div class="x_content">
         @if($items->count() > 0)
         <div class="table-responsive">
-          <table class="table table-hover table-condensed">
+          <table class="table table-hover table-condensed daftarAset">
             <thead>
               <tr>
                 <th>No</th>
                 <th>Kode Barang</th>
                 <th>Register</th>
-                <th>Nama/ Jenis Barang</th>
+                <th>Nama /<br>Jenis Barang</th>
                 <th>Merk/ Type</th>
                 <th>Asal</th>
                 <th>Tahun</th>
                 <th>Keadaan</th>
                 <th>Jumlah</th>
-                <th>Harga</th>
+                <th>Harga (Rp.)</th>
                 <th></th>
               </tr>
             </thead>
@@ -125,7 +146,7 @@
                   <td>{{ $item->tahun }}</td>
                   <td>{{ ['b' => 'Baik', 'kb' => 'Kurang Baik', 'rb' => 'Rusak Berat'][$item->keadaan] }}</td>
                   <td>{{ $item->jumlah }}</td>
-                  <td class="text-right">Rp. {{ number_format($item->harga, 2, ',', '.') }}</td>
+                  <td class="text-right">{{ number_format($item->harga, 2, ',', '.') }}</td>
                   <td class="text-center">
                     @if(Auth::user()->isAdmin() || Auth::user()->id == $item->register)
                       {!! Form::model($item, ['route' => ['inventaris.hapus', $item], 'method' => 'delete', 'class' => 'form-inline']) !!}
@@ -156,16 +177,6 @@
           Tidak ada data.
 
           <script type="text/javascript">
-            /**
-            swal({
-              title: 'Tidak ada data!',
-              text: '',
-              type: 'info',
-              timer: 10000,
-              showCloseButton: true,
-              showConfirmButton: false,
-            });
-            **/
             new PNotify({
               title: 'Info!',
               type: 'info',
@@ -180,8 +191,106 @@
 </div>
 
 <script type="text/javascript" src="{{ asset('js/index.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery-print.js') }}"></script>
 @if(empty($filter['golongan']))
 <script type="text/javascript">
   changeKategori('', $('[name=bidang]'), 'bidang');
+
+  var form = $('#formFilter'),
+      data = form.serialize();
+  $('.download').click(function(e){
+    e.preventDefault();
+    data += "&download={{ csrf_token() }}";
+    window.location.href = '/download/?'+data;
+  });
+
+  $('.print').click(function(e){
+    e.preventDefault();
+    data += "&print={{ csrf_token() }}";
+
+    BootstrapDialog.show({
+      type: BootstrapDialog.TYPE_PRIMARY,
+      cssClass: 'print-area',
+      title: '<i class="fa fa-eye fa-fw"></i> Pratinjau <span class="pull-right"><a class="btn btn-dark" title="Cetak" onclick="$(\'#print-area\').print()"><i class="fa fa-print"></i> Cetak</a></span>',
+      message: function(dialog) {
+        var $message = $('<div id="print-area"></div>');
+        var pageToLoad = dialog.getData('pageToLoad');
+        $message.load(pageToLoad);
+
+        return $message;
+      },
+      buttons: [
+        {
+          label: '<i class="fa fa-print"></i> Cetak',
+          cssClass: 'btn-dark',
+          action: function(){
+              $('#print-area').print();
+          }
+        }
+      ],
+      data: {
+        'pageToLoad': '/print/?'+data
+      }
+    });
+  });
+
+  $('.rentangtanggal').daterangepicker({
+    ranges: {
+       'Hari Ini': [moment(), moment()],
+       'Kemarin': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+       '7 Hari Lalu': [moment().subtract(6, 'days'), moment()],
+       '30 Hari Lalu': [moment().subtract(29, 'days'), moment()],
+       'Bulan Ini': [moment().startOf('month'), moment().endOf('month')],
+       'Bulan Kemarin': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+    },
+    locale: {
+        format: "DD/MM/YYYY",
+        separator: " - ",
+        applyLabel: "Terapkan",
+        cancelLabel: "Kosongkan",
+        fromLabel: "Dari",
+        toLabel: "Sampai",
+        customRangeLabel: "Lainnya",
+        daysOfWeek: [
+            "Mg",
+            "Sn",
+            "Sl",
+            "Rb",
+            "Km",
+            "Jm",
+            "Sb"
+        ],
+        monthNames: [
+            "Januari",
+            "Februari",
+            "Maret",
+            "April",
+            "Mei",
+            "Juni",
+            "Juli",
+            "Agustus",
+            "September",
+            "Oktober",
+            "November",
+            "Desember"
+        ],
+        firstDay: 1,
+    },
+    opens: "center",
+    alwaysShowCalendars: true,
+    linkedCalendars: false,
+    autoUpdateInput: false,
+    showDropdowns: true,
+});
+
+$('.rentangtanggal').on('apply.daterangepicker', function(ev, picker) {
+  if($(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY'))) {
+    $('#formFilter').submit();
+  }
+});
+
+$('.rentangtanggal').on('cancel.daterangepicker', function(ev, picker) {
+  $(this).val('');
+});
 </script>
 @endif

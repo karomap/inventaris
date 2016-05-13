@@ -58,15 +58,15 @@ return array(
     ),
 
     'properties' => array(
-        'creator'        => 'Maatwebsite',
-        'lastModifiedBy' => 'Maatwebsite',
+        'creator'        => 'Inventaris 0.0.1',
+        'lastModifiedBy' => 'Inventaris 0.0.1',
         'title'          => 'Spreadsheet',
         'description'    => 'Default spreadsheet export',
         'subject'        => 'Spreadsheet export',
         'keywords'       => 'maatwebsite, excel, export',
         'category'       => 'Excel',
-        'manager'        => 'Maatwebsite',
-        'company'        => 'Maatwebsite',
+        'manager'        => 'Inventaris 0.0.1',
+        'company'        => 'Inventaris 0.0.1',
     ),
 
     /*
@@ -82,7 +82,7 @@ return array(
         |--------------------------------------------------------------------------
         */
         'pageSetup' => array(
-            'orientation'           => 'portrait',
+            'orientation'           => 'landscape',
             'paperSize'             => '9',
             'scale'                 => '100',
             'fitToPage'             => false,
@@ -106,7 +106,7 @@ return array(
     |
     */
 
-    'creator'    => 'Maatwebsite',
+    'creator'    => 'Inventaris 0.0.1',
 
     'csv'        => array(
         /*

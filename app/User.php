@@ -29,7 +29,7 @@ class User extends Authenticatable
         if(!empty($avatar)) {
             return '/images/'.$avatar;
         }
-        
+
         return '/images/avatar.png';
 
     }

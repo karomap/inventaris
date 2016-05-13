@@ -165,7 +165,13 @@ $('[name=findkategori]').autocomplete({
   ul.addClass('dropdown-menu');
   return $('<li>')
   .addClass('dropdown-item')
-  .append('<a><small>' + item.golongan + ' > ' + item.bidang + ' > ' + kelompok + '</small><br>' + 
+  .append('<a><small>' + item.golongan + ' > ' + item.bidang + ' > ' + kelompok + '</small><br>' +
           sub_kelompok + ' > ' + uraian + '</a>')
   .appendTo(ul);
 };
+
+if($('.pagination').length) {
+  $('.pagination').find('a').each(function(){
+    ajaxlink($(this));
+  });
+}
