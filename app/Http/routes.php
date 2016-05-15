@@ -19,8 +19,9 @@ Route::group(['namespace' => 'Auth'], function(){
 
 Route::group(['middleware' => 'auth'], function() {
   Route::get('/', 'HomeController@index');
-  Route::get('download', ['as' => 'download', 'uses' => 'InventarisController@index']);
+  Route::get('download', ['as' => 'download', 'uses' => 'InventarisController@download']);
   Route::get('print', ['as' => 'print', 'uses' => 'InventarisController@index']);
+  Route::get('printrekap', ['as' => 'printrekap', 'uses' => 'HomeController@dashboard']);
 
   Route::group(['middleware' => 'ajaxonly'], function(){
     Route::get('dashboard', 'HomeController@dashboard');

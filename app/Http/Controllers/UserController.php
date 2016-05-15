@@ -56,6 +56,8 @@ class UserController extends Controller
         $user->password = bcrypt($request->password);
       if (!empty($request->role))
         $user->role = $request->role;
+      if (!empty($request->avatar))
+        $user->avatar = $request->avatar;
       $user->update();
 
       return response(['status' => 'success', 'message' => $user->name.' berhasil perbarui.']);

@@ -25,9 +25,10 @@
     <div class="clearfix"></div>
     <br />
     <div>
-      <h1><i class="fa fa-cubes" style="font-size: 26px;"></i> Inventaris</h1>
+      <h1><i class="fa fa-cubes" style="font-size: 26px;"></i> SIMAS</h1>
 
-      <p>©2016 All Rights Reserved. Powered by Laravel 5</p>
+      <p>Sistem Informasi Manajemen Aset</p>
+      <p>©2016 All Rights Reserved.</p>
     </div>
   {!! Form::close() !!}
 @endsection

@@ -65,9 +65,6 @@
           {!! Form::select('keadaan', ['' => 'Semua', 'b' => 'Baik', 'kb' => 'Kurang Baik', 'rb' => 'Rusak Berat'], null, ['class' => 'form-control input-sm', 'onchange' => '$("#formFilter").submit()']) !!}
         </div>
       </div>
-      <div class="col-md-2 col-xs-12 text-right">
-        <button type="reset" class="reset btn btn-warning btn-sm"><i class="fa fa-refresh"></i> Setel Ulang</button>
-      </div>
     </div>
 
     <div class="row">
@@ -85,6 +82,9 @@
       </div>
       <div class="col-md-4 col-xs-12">
           {!! Form::text('tanggal', null, ['class' => 'form-control input-sm rentangtanggal', 'readonly', 'placeholder' => 'Tanggal Dibuat', 'style' => 'background: #fff;cursor:pointer']) !!}
+      </div>
+      <div class="col-md-4 col-xs-12 text-right">
+        <button type="reset" class="reset btn btn-warning btn-sm"><i class="fa fa-refresh"></i> Setel Ulang</button>
       </div>
     </div>
   {!! Form::close() !!}
@@ -170,9 +170,13 @@
           <div class="pull-left">
             {{ $items->appends($filter)->links() }}
           </div>
-          <div class="pull-right">
-            <h2 class="badge">Total : Rp. {{ number_format($total, 2, ',', '.') }}</h2>
-          </div>
+          @if($total > 0)
+            <div class="pull-right">
+              <h2 class="badge">Total : Rp. {{ number_format($total, 2, ',', '.') }}</h2>
+            </div>
+            <div class="clearfix"></div>
+            <small><strong>Total:</strong> {{ spell($total) }} Rupiah</small>
+          @endif
         @else
           Tidak ada data.
 
@@ -200,7 +204,7 @@
       data = form.serialize();
   $('.download').click(function(e){
     e.preventDefault();
-    data += "&download={{ csrf_token() }}";
+
     window.location.href = '/download/?'+data;
   });
 

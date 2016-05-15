@@ -6,8 +6,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Rifa'i M. Hanif">
+    <meta name="description" content="Sistem Informasi Manajemen Aset">
 
-    <title>Inventaris</title>
+    <title>SIMAS</title>
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}">
@@ -30,6 +32,7 @@
     <script>
       var nw = require('nw.gui');
       var win = nw.Window.get();
+      nw.App.clearCache();
     </script>
 
   </head>

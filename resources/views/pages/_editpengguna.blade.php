@@ -204,6 +204,9 @@
       data: $form.serialize(),
       success: function(data) {
         NProgress.start();
+        @if($user->id == Auth::user()->id)
+          $('.user-avatar').prop('src', $('.previewAvatar').prop('src'));
+        @endif
         $('.right_col').load('/profil', function(){
           $('title').html($('.judul').html());
           $button.button('reset');

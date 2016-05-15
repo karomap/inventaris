@@ -21,9 +21,13 @@ class HomeController extends Controller
       return view('layouts.app');
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
       $golongan = Golongan::get();
+
+      if ($request->printrekap == csrf_token()) {
+          return view('pages.printrekap', compact('golongan'));
+      }
 
       return view('home', compact('golongan'));
     }
@@ -35,4 +39,5 @@ class HomeController extends Controller
 
       return view('pages.profil', compact(['user', 'items']));
     }
+
 }

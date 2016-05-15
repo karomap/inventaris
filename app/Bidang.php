@@ -37,7 +37,8 @@ class Bidang extends Model
     public function jumlahRekap()
     {
       $id = $this->attributes['id'];
-      $item = Rekap::select('jumlah')->whereRaw("id_bidang = {$id} AND EXTRACT(YEAR FROM created_at) = EXTRACT(YEAR FROM now()) - 1")->get();
+      $first_date = date('Y').'-01-01';
+      $item = Rekap::select('jumlah')->whereRaw("id_bidang = {$id} AND DATE(created_at) = '{$first_date}'")->get();
       return $item[0]->jumlah;
     }
 
@@ -51,7 +52,8 @@ class Bidang extends Model
     public function hargaRekap()
     {
       $id = $this->attributes['id'];
-      $item = Rekap::select('harga')->whereRaw("id_bidang = {$id} AND EXTRACT(YEAR FROM created_at) = EXTRACT(YEAR FROM now()) - 1")->get();
+      $first_date = date('Y').'-01-01';
+      $item = Rekap::select('harga')->whereRaw("id_bidang = {$id} AND DATE(created_at) = '{$first_date}'")->get();
       return $item[0]->harga;
     }
 }

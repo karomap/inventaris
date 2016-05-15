@@ -101,10 +101,6 @@ class InventarisController extends Controller
             $pg = $request->pg;
         }
 
-        if ($request->download == csrf_token()) {
-            $this->download($cond, $order, $order_state);
-        }
-
         if ($request->print == csrf_token()) {
             $items = Item::whereRaw($cond)->orderBy($order, $order_state)->get();
             return view('pages.print', compact('items'));
@@ -167,7 +163,7 @@ class InventarisController extends Controller
         $item->keadaan = $request->keadaan;
         $item->jumlah = $request->jumlah;
         $item->harga = $request->harga;
-        $item->keterangan = $request->keterangan;
+        $item->keterangan = ucwords($request->keterangan);
         $item->save();
 
         return response(['status' => 'success', 'message' => $item->merk_type.' berhasil ditambahkan.']);
@@ -241,7 +237,7 @@ class InventarisController extends Controller
         $item->keadaan = $request->keadaan;
         $item->jumlah = $request->jumlah;
         $item->harga = $request->harga;
-        $item->keterangan = $request->keterangan;
+        $item->keterangan = ucwords($request->keterangan);
         $item->update();
 
         return response(['status' => 'success', 'message' => $item->merk_type.' berhasil diperbarui.']);
@@ -322,8 +318,83 @@ class InventarisController extends Controller
         }
     }
 
-    private function download($cond, $order, $order_state)
+    public function download(Request $request)
     {
+        $cond = "1";
+        $order = "updated_at";
+        $order_state = "desc";
+
+        if(!empty($request->golongan)) {
+            $cond .= " AND id_kategori LIKE '{$request->golongan}%'";
+        }
+
+        if(!empty($request->bidang)) {
+            $cond .= " AND id_kategori LIKE '{$request->bidang}%'";
+        }
+
+        if(!empty($request->kelompok)) {
+            $cond .= " AND id_kategori LIKE '{$request->kelompok}%'";
+        }
+
+        if(!empty($request->subkelompok)) {
+            $cond .= " AND id_kategori LIKE '{$request->subkelompok}%'";
+        }
+
+        if(!empty($request->kat)) {
+            $cond .= " AND id_kategori = {$request->kat}";
+        }
+
+        if(!empty($request->keadaan)) {
+            $cond .= " AND keadaan = '{$request->keadaan}'";
+        }
+
+        if(!empty($request->keyword)) {
+            $keyword = strtolower($request->keyword);
+            $cond .= " AND LOWER(merk_type) LIKE '%{$keyword}%'";
+        }
+
+        if(!empty($request->tanggal)) {
+            $tanggal = explode(' - ', $request->tanggal);
+            list($start,$end) = $tanggal;
+            $dari = Carbon::createFromFormat('d/m/Y H:i:s', $start.' 00:00:00');
+            $sampai = Carbon::createFromFormat('d/m/Y H:i:s', $end.' 23:59:59');
+            $cond .= " AND updated_at BETWEEN '".$dari."' AND '".$sampai."'";
+        }
+
+        if(!empty($request->order)) {
+            switch($request->order) {
+                case 'typeA':
+                    $order = 'merk_type';
+                    $order_state = 'asc';
+                    break;
+
+                case 'typeZ':
+                    $order = 'merk_type';
+                    $order_state = 'desc';
+                    break;
+
+                case 'asal':
+                    $order = 'asal';
+                    $order_state = 'asc';
+                    break;
+
+                case 'keadaan':
+                    $order = 'keadaan';
+                    $order_state = 'asc';
+                    break;
+
+                case 'terlama':
+                    $order = 'updated_at';
+                    $order_state = 'asc';
+                    break;
+
+                default:
+                    $order = 'updated_at';
+                    $order_state = 'desc';
+                    break;
+            }
+        }
+
         $data = Item::whereRaw($cond)->orderBy($order, $order_state)->get();
 
         foreach ($data as $key => $item) {

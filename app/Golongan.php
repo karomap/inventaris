@@ -27,21 +27,23 @@ class Golongan extends Model
     public function jumlahRekap()
     {
       $id = $this->attributes['id'];
-      $item = Rekap::select(DB::raw('sum(jumlah) as jumlah'))->whereRaw("id_bidang LIKE '{$id}%' AND EXTRACT(YEAR FROM created_at) = EXTRACT(YEAR FROM now()) - 1")->get();
+      $first_date = date('Y').'-01-01';
+      $item = Rekap::select(DB::raw('sum(jumlah) as jumlah'))->whereRaw("id_bidang LIKE '{$id}%' AND DATE(created_at) = '{$first_date}'")->get();
       return $item[0]->jumlah;
     }
 
     public function harga()
     {
       $id = $this->attributes['id'];
-      $item = Item::select(DB::raw('SUM(harga) as harga'))->whereRaw("id_kategori LIKE '{$id}%'")->get();
+      $item = Item::select(DB::raw('sum(harga) as harga'))->whereRaw("id_kategori LIKE '{$id}%'")->get();
       return $item[0]->harga;
     }
 
     public function hargaRekap()
     {
       $id = $this->attributes['id'];
-      $item = Rekap::select(DB::raw('sum(harga) as harga'))->whereRaw("id_bidang LIKE '{$id}%' AND EXTRACT(YEAR FROM created_at) = EXTRACT(YEAR FROM now()) - 1")->get();
+      $first_date = date('Y').'-01-01';
+      $item = Rekap::select(DB::raw('sum(harga) as harga'))->whereRaw("id_bidang LIKE '{$id}%' AND DATE(created_at) = '{$first_date}'")->get();
       return $item[0]->harga;
     }
 }

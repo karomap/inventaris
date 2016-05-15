@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col">
   <div class="left_col scroll-view">
     <div class="navbar nav_title" style="border: 0;">
-      <a href="{{ url('/dashboard') }}" class="site_title"><i class="fa fa-cube"></i> <span>Inventaris</span></a>
+      <a href="{{ url('/dashboard') }}" class="site_title" title="Sistem Informasi Manajemen Aset"><i class="fa fa-cube"></i> <span>SIMAS</span></a>
     </div>
 
     <div class="clearfix"></div>
@@ -9,11 +9,15 @@
     <!-- menu profile quick info -->
     <div class="profile">
       <div class="profile_pic">
-        <img src="{{ Auth::user()->avatar }}" class="img-circle profile_img">
+        <img src="{{ asset('images/logo.png') }}" class="profile_img">
       </div>
-      <div class="profile_info">
-        <span>Selamat Datang,</span>
-        <h2>{{ Auth::user()->name }}</h2>
+      <div class="profile_info text-center">
+        <h2>Dinas Cipta Karya</h2>
+        <h2>dan</h2>
+        <h2>Perumahan Rakyat</h2>
+        <br>
+        <h2>Kabupaten</h2>
+        <h2>Indragiri Hilir</h2>
       </div>
     </div>
     <!-- /menu profile quick info -->
